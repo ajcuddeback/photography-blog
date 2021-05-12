@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/ajcuddeback/photography-blog/issues"
   },
-  "homepage": "https://github.com/ajcuddeback/photography-blog#readme"
+  "homepage": "https://github.com/ajcuddeback/photography-blog#readme",
+  "dependencies": {
+    "if-env": "^1.0.4"
+  },
+  "devDependencies": {
+    "concurrently": "^6.1.0"
+  }
 }
