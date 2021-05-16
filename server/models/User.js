@@ -28,6 +28,10 @@ const userSchema = new Schema(
         },
         passwordVerify: {
             type: String
+        }, 
+        confirmVerified: {
+            type: Boolean,
+            default: false
         }
     }, 
     {
@@ -45,6 +49,15 @@ userSchema.pre('save', async function (next) {
 
     next();
 });
+
+userSchema.pre('updateOne', async function(next) {
+        const data = this.getUpdate();
+        const saltRounds = 10;
+        data.password = await bcrypt.hash(data.password, saltRounds);
+
+
+    next();
+})
 
 userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);

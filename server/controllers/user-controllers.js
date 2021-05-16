@@ -35,12 +35,19 @@ module.exports = {
             return;
         };
 
-        const correctPw = user.isCorrectPassword(body.password);
+        const correctPw = await user.isCorrectPassword(body.password);
+
+        console.log(correctPw)
 
         if(!correctPw) {
-            res.status(400).json({ message: 'Incorrect PW!' });
-            return;
+            return res.status(400).json({ message: 'Incorrect PW!' });
         };
+
+        await User.findOneAndUpdate(
+            { username: body.username },
+            { confirmVerified: false },
+            { new: true }    
+        )
 
         const token = signToken(user);
 
@@ -94,7 +101,11 @@ module.exports = {
 
     },
     async confirmCode(req, res) {
-        const userData = await User.findOne({ passwordVerify: req.body.code });
+        const userData = await User.findOneAndUpdate(
+            { passwordVerify: req.body.code },
+            {confirmVerified: true},
+            {new: true}
+        );
 
         if(!userData) {
             res.status(400).json({ message: 'The code does not match!' });
@@ -104,10 +115,11 @@ module.exports = {
         res.json(userData)
     },
     async resetPW({ body }, res) {
-        const userData = await User.findOneAndUpdate(
-            { email: body.email },
-            { $set: { password: body.password } },
-            {new: true }
+
+        const userData = await User.updateOne(
+            { $and: [{email: body.email}, {confirmVerified: true}] },
+            { password: body.password },
+            { new: true }
         );
 
         if(!userData) {
