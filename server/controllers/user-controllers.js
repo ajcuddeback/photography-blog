@@ -1,7 +1,8 @@
 const { User } = require('../models');
 
 const { signToken } = require('../utils/auth');
-const sendMail = require('../utils/sendMail');
+const nodemailer = require('nodemailer');
+require('dotenv').config();
 
 module.exports = {
     async getSingleUser({ user = null, params }, res) {
@@ -48,14 +49,20 @@ module.exports = {
         res.json({ token, userData });
     },
     async sendMail(req, res, next) {
-        let testAccount = await nodemailer.createTestAccount();
 
         let transporter = nodemailer.createTransport({
-            port: 587,
-            secure: false
+            service: 'gmail',
+            auth: {
+                user: 'ajcuddeback@gmail.com',
+                pass: `${process.env.GOOGLE_PW}`
+            }
         });
 
-        let code = 456;
+        let code;
+
+        for(let i = 0; i < 6; i++) {
+            code += Math.floor(Math.random() * 10)
+        }
 
         const userData = User.findOneAndUpdate(
             { email: req.body.email }, 
@@ -77,9 +84,15 @@ module.exports = {
 
         console.log("Message sent: %s", info.messageId);
     },
-    async resetPW({ body }, res) {
-        
+    async confirmCode(req, res) {
+        const userData = User.findOne({ passwordVerify: req.body.code });
 
+        if(!userData) {
+            res.status(400).json({ message: 'The code does not match!' });
+            return;
+        };
+    },
+    async resetPW({ body }, res) {
         const userData = await User.findOneAndUpdate(
             { email: body.email },
             { $set: { password: body.password } },
