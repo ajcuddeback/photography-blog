@@ -47,13 +47,15 @@ userSchema.pre('save', async function (next) {
         this.password = await bcrypt.hash(this.password, saltRounds);
     }
 
+    console.log('hello')
+
     next();
 });
 
-userSchema.pre('updateOne', async function(next) {
-        const data = this.getUpdate();
-        const saltRounds = 10;
-        data.password = await bcrypt.hash(data.password, saltRounds);
+userSchema.pre('findOneAndUpdate', async function(next) {
+    if(this._update.password) {
+        this._update.password = await bcrypt.hash(this._update.password, 10);
+    }
 
 
     next();

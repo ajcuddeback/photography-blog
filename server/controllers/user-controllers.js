@@ -116,7 +116,7 @@ module.exports = {
     },
     async resetPW({ body }, res) {
 
-        const userData = await User.updateOne(
+        const userData = await User.findOneAndUpdate(
             { $and: [{email: body.email}, {confirmVerified: true}] },
             { password: body.password },
             { new: true }
