@@ -16,6 +16,16 @@ module.exports = {
 
         res.json(photoData)
     },
+    async getTags(req, res) {
+        const tagData = await Tag.find({});
+
+        if(!tagData) {
+            res.status(500).json({ message: 'tags not seeded' });
+            return;
+        }
+
+        res.json(tagData);
+    },
     async addPhoto(req, res) {
         const file = req.file;
         const result = await uploadFile(file);
