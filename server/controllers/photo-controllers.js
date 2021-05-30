@@ -14,32 +14,31 @@ module.exports = {
             return res.status(400).json({ message: 'No photo found at this id!' });
         }
 
-        res.json(photoData);
     },
     async addPhoto(req, res) {
 
         const file = req.file;
-
         const result = await uploadFile(file);
+        const newFileUploaded = {
+            title: req.body.title,
+            description: req.body.description,
+            alttext: req.body.alttext,
+            price: req.body.price,
+            tags: req.body.tags,
+            fileLink: result.Location,
+            s3_key: result.Key
+        };
 
-        console.log(result)
-                // const newFileUploaded = {
-                //     title: req.body.title,
-                //     description: req.body.description,
-                //     altext: req.body.alttext,
-                //     price: req.body.price,
-                //     tags: req.body.tags,
-                //     fileLink: s3FileURL + file.originalname,
-                //     s3_key: params.Key
-                // };
+        console.log(newFileUploaded)
 
-                // const photoData = Photo.create(newFileUploaded);
+        const photoData = await Photo.create(newFileUploaded);
 
-                // if(!photoData) {
-                //     res.json(500).json({ message: 'something went wrong!' });
-                //     return;
-                // }
+        if(!photoData) {
+            res.json(500).json({ message: 'something went wrong!' });
+            return;
+        }
 
-                // res.json(photoData)
+        console.log('h' + photoData)
+        res.json({photoData})
     }
 }
