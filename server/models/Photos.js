@@ -2,10 +2,6 @@ const { Schema, model } = require('mongoose');
 
 const photoSchema = new Schema(
     {
-        img: {
-            data: Buffer,
-            type: String
-        },
         title: {
             type: String, 
             required: true
@@ -29,6 +25,14 @@ const photoSchema = new Schema(
             required: true
             }
         ],
+        fileLink: {
+            type: String,
+            required: true
+        },
+        s3_key: {
+            type: String,
+            required: true
+        },
         comments: [
             {
                 type: Schema.Types.ObjectId,

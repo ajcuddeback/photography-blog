@@ -1,4 +1,6 @@
 const { Photo, Comment, Tag } = require('../models');
+const uploadFile  = require('../utils/s3');
+require('dotenv').config();
 
 module.exports = {
     async getPhotos(req, res) {
@@ -15,24 +17,29 @@ module.exports = {
         res.json(photoData);
     },
     async addPhoto(req, res) {
-        const obj = {
-            img: {
-                data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-                contentType: 'image/png'
-            },
-            title: req.body.title,
-            description: req.body.description,
-            alttext: req.body.alttext,
-            price: req.body.price,
-            tags: req.body.tags  
-        }
 
-        const photoData = await Photo.create(obj);
+        const file = req.file;
 
-        if(!photoData) {
-            return res.status(500).json({ message: 'Something went wrong!' });
-        }
+        const result = await uploadFile(file);
 
-        res.json(photoData);
+        console.log(result)
+                // const newFileUploaded = {
+                //     title: req.body.title,
+                //     description: req.body.description,
+                //     altext: req.body.alttext,
+                //     price: req.body.price,
+                //     tags: req.body.tags,
+                //     fileLink: s3FileURL + file.originalname,
+                //     s3_key: params.Key
+                // };
+
+                // const photoData = Photo.create(newFileUploaded);
+
+                // if(!photoData) {
+                //     res.json(500).json({ message: 'something went wrong!' });
+                //     return;
+                // }
+
+                // res.json(photoData)
     }
 }
