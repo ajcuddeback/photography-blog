@@ -37,8 +37,6 @@ module.exports = {
 
         const correctPw = await user.isCorrectPassword(body.password);
 
-        console.log(correctPw)
-
         if(!correctPw) {
             return res.status(400).json({ message: 'Incorrect PW!' });
         };
@@ -72,8 +70,6 @@ module.exports = {
             code += Math.floor(Math.random() * 10)
         }
 
-        console.log(code)
-
         // Set the code in to the User model
         const userData = await User.findOneAndUpdate(
             { email: req.body.email }, 
@@ -98,7 +94,6 @@ module.exports = {
         console.log("Message sent: %s", info.messageId);
 
         res.json(userData)
-
     },
     async confirmCode(req, res) {
         const userData = await User.findOneAndUpdate(

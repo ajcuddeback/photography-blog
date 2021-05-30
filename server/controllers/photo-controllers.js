@@ -3,7 +3,7 @@ const uploadFile  = require('../utils/s3');
 
 module.exports = {
     async getPhotos(req, res) {
-        const photoData = await Photo.find({});
+        const photoData = await Photo.find({}).populate('tags');
 
         res.json(photoData);
     }, 
@@ -29,12 +29,13 @@ module.exports = {
     async addPhoto(req, res) {
         const file = req.file;
         const result = await uploadFile(file);
+        const tags = await Tag.find({});
         const newFileUploaded = {
             title: req.body.title,
             description: req.body.description,
             alttext: req.body.alttext,
             price: req.body.price,
-            tags: req.body.tags,
+            tags: tags[req.body.tagsIndex]._id,
             fileLink: result.Location,
             s3_key: result.Key
         };
