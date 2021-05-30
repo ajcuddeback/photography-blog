@@ -5,9 +5,13 @@ const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
 const {
-    addPhoto
+    addPhoto,
+    getPhoto,
+    getPhotos
 } = require('../../controllers/photo-controllers');
 
-router.route('/upload').post(upload.single('file'), addPhoto);
+router.route('/').get(getPhotos)
+router.route('/:id').get(getPhoto);
+router.route('/upload').post(authMiddleware, upload.single('file'), addPhoto);
 
 module.exports = router;

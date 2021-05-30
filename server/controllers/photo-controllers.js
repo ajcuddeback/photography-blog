@@ -8,11 +8,13 @@ module.exports = {
         res.json(photoData);
     }, 
     async getPhoto(req, res) {
-        const photoData = await Photo.findOne({ _id: req.body.id });
+        const photoData = await Photo.findOne({ _id: req.params.id });
 
         if(!photoData) {
             return res.status(400).json({ message: 'No photo found at this id!' });
         }
+
+        res.json(photoData)
 
     },
     async addPhoto(req, res) {
@@ -29,16 +31,12 @@ module.exports = {
             s3_key: result.Key
         };
 
-        console.log(newFileUploaded)
-
         const photoData = await Photo.create(newFileUploaded);
 
         if(!photoData) {
             res.json(500).json({ message: 'something went wrong!' });
             return;
         }
-
-        console.log('h' + photoData)
-        res.json({photoData})
+        res.json(photoData)
     }
 }
