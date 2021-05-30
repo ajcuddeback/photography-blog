@@ -19,7 +19,9 @@ function uploadFile(file) {
     const uploadParams = {
         Bucket: bucketName,
         Body: fileStream,
-        Key: file.filename
+        Key: file.filename,
+        ContentType: file.mimetype, 
+        ACL: "public-read"
     }
 
     return s3bucket.upload(uploadParams).promise();
