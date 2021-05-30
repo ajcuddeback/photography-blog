@@ -1,10 +1,10 @@
 const { Photo, Comment, Tag } = require('../models');
 const uploadFile  = require('../utils/s3');
-require('dotenv').config();
 
 module.exports = {
     async getPhotos(req, res) {
         const photoData = await Photo.find({});
+
         res.json(photoData);
     }, 
     async getPhoto(req, res) {
@@ -15,10 +15,8 @@ module.exports = {
         }
 
         res.json(photoData)
-
     },
     async addPhoto(req, res) {
-
         const file = req.file;
         const result = await uploadFile(file);
         const newFileUploaded = {
@@ -37,6 +35,7 @@ module.exports = {
             res.json(500).json({ message: 'something went wrong!' });
             return;
         }
+
         res.json(photoData)
     }
 }

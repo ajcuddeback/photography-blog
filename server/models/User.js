@@ -41,26 +41,24 @@ const userSchema = new Schema(
     }
 );
 
+// Before saving the user, encrypt the password
 userSchema.pre('save', async function (next) {
     if (this.isNew || this.isModified('password')) {
         const saltRounds = 10;
         this.password = await bcrypt.hash(this.password, saltRounds);
     }
-
-    console.log('hello')
-
     next();
 });
 
+// Before running the find one and update, encrypt password
 userSchema.pre('findOneAndUpdate', async function(next) {
     if(this._update.password) {
         this._update.password = await bcrypt.hash(this._update.password, 10);
     }
-
-
     next();
 })
 
+// Adding a method to check if the password is valid or not
 userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
 };
