@@ -1,5 +1,6 @@
 const { Photo, Comment, Tag } = require('../models');
 const uploadFile  = require('../utils/s3');
+require('dotenv').config();
 
 module.exports = {
     async getPhotos(req, res) {
@@ -36,7 +37,7 @@ module.exports = {
             alttext: req.body.alttext,
             price: req.body.price,
             tags: tags[req.body.tagsIndex]._id,
-            fileLink: result.Location,
+            fileLink: `https://${process.env.AWS_ClOUDFRONT_DOMAIN}.cloudfront.net/${result.Key}`,
             s3_key: result.Key
         };
 
