@@ -4,12 +4,12 @@ require('dotenv').config();
 
 module.exports = {
     async getPhotos(req, res) {
-        const photoData = await Photo.find({}).populate('tags');
+        const photoData = await Photo.find({}).populate('tags').populate('comments');
 
         res.json(photoData);
     }, 
     async getPhoto(req, res) {
-        const photoData = await Photo.findOne({ _id: req.params.id });
+        const photoData = await Photo.findOne({ _id: req.params.id }).populate('tags').populate('comments');
 
         if(!photoData) {
             return res.status(400).json({ message: 'No photo found at this id!' });
@@ -60,6 +60,18 @@ module.exports = {
 
         res.json(photoData)
     }, 
+    async addComment(req, res) {
+        const commentData = await Comment.create(req.body);
+
+        const photoData = await Photo.findOneAndUpdate({ _id: req.params.id }, { $push: { comments: commentData._id } }, { new: true }).populate('comments').populate('tags');
+
+        if(!photoData) {
+            res.status(500).json({ message: 'Something went wrong!' });
+            return;
+        }
+
+        res.json(photoData);
+    },
     async deletePhoto(req, res) {
         const data = await Photo.findOneAndDelete(req.params.key);
 
