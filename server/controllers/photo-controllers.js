@@ -27,6 +27,16 @@ module.exports = {
 
         res.json(tagData);
     },
+    async getPhotoByTag(req, res) {
+        const photoData = await Photo.find({ tags: req.params.tags });
+
+        if(!photoData) {
+            res.status(400).json({ message: 'No Photos associated with this tag!' });
+            return;
+        }
+
+        res.json(photoData);
+    },
     async addPhoto(req, res) {
         const file = req.file;
         const result = await uploadFile(file);

@@ -18,13 +18,12 @@ const photoSchema = new Schema(
             type: Number,
             required: false
         },
-        tags: [
+        tags: 
             {
             type: Schema.Types.ObjectId,
             ref: 'Tag',
             required: true
-            }
-        ],
+            },
         fileLink: {
             type: String,
             required: true

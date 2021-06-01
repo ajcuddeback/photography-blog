@@ -8,6 +8,7 @@ const {
     addPhoto,
     getPhoto,
     getTags,
+    getPhotoByTag,
     getPhotos,
     deletePhoto
 } = require('../../controllers/photo-controllers');
@@ -15,6 +16,8 @@ const {
 router.route('/').get(getPhotos);
 
 router.route('/tags').get(getTags);
+
+router.route('/tags/:tags').get(getPhotoByTag);
 
 router.route('/:id').get(getPhoto);
 
