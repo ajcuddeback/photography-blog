@@ -30,4 +30,13 @@ function uploadFile(file) {
     return s3bucket.upload(uploadParams).promise();
 }
 
-module.exports = uploadFile
+function deleteObject(key) {
+    const params = {
+        Bucket: bucketName,
+        Key: key,
+    }
+
+    return s3bucket.deleteObject(params).promise();
+}
+
+module.exports = { uploadFile, deleteObject }

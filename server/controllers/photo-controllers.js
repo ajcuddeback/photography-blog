@@ -1,5 +1,5 @@
 const { Photo, Comment, Tag } = require('../models');
-const uploadFile  = require('../utils/s3');
+const { uploadFile, deleteObject }  = require('../utils/s3');
 require('dotenv').config();
 
 module.exports = {
@@ -49,5 +49,17 @@ module.exports = {
         }
 
         res.json(photoData)
+    }, 
+    async deletePhoto(req, res) {
+        const data = await Photo.findOneAndDelete(req.params.key);
+
+        const photoData = await Photo.deleteOne({ s3_key: req.params.key }, { new: true });
+
+        if(!photoData) {
+            res.status(400).json({ message: 'No photo found with this key!' });
+            return;
+        }
+
+        res.json(photoData);
     }
 }
