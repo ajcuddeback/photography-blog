@@ -11,7 +11,8 @@ const {
     getPhotoByTag,
     getPhotos,
     deletePhoto,
-    addComment
+    addComment,
+    deleteComment
 } = require('../../controllers/photo-controllers');
 
 router.route('/').get(getPhotos);
@@ -25,6 +26,8 @@ router.route('/:id').get(getPhoto);
 router.route('/upload').post(authMiddleware, upload.single('file'), addPhoto);
 
 router.route('/comment/:id').put(addComment);
+
+router.route('/comment/:id/:photoId').put(deleteComment);
 
 router.route('/delete/:key').delete(authMiddleware, deletePhoto);
 

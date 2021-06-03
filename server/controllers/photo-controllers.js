@@ -72,6 +72,18 @@ module.exports = {
 
         res.json(photoData);
     },
+    async deleteComment(req, res) {
+        const commentData = await Comment.findOneAndDelete({ _id: req.params.id });
+
+        const photoData = await Photo.findOneAndUpdate({ _id: req.params.photoId }, { $pull: { comments: req.params.id } }, { new: true }).populate('comments').populate('tags');
+
+        if(!photoData) {
+            res.status(400).json({ message: 'No photo or comment found at this id!' });
+            return;
+        }
+
+        res.json(photoData);
+    },
     async deletePhoto(req, res) {
         const data = await Photo.findOneAndDelete(req.params.key);
 
