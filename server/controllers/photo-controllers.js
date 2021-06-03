@@ -97,7 +97,7 @@ module.exports = {
         res.json(photoData);
     },
     async deletePhoto(req, res) {
-        const data = await Photo.findOneAndDelete(req.params.key);
+        const data = await deleteObject(req.params.key);
 
         const photoData = await Photo.deleteOne({ s3_key: req.params.key }, { new: true });
 
