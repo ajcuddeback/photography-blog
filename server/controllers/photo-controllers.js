@@ -1,5 +1,6 @@
 const { Photo, Comment, Tag } = require('../models');
 const { uploadFile, deleteObject }  = require('../utils/s3');
+const fs = require('fs');
 require('dotenv').config();
 
 module.exports = {
@@ -56,6 +57,17 @@ module.exports = {
         if(!photoData) {
             res.json(500).json({ message: 'something went wrong!' });
             return;
+        }
+
+        if(result) {
+            fs.unlink(req.file.path, (err) => {
+                if(err) {
+                    console.error(err);
+                    return;
+                }
+
+                console.log('file removed')
+            })
         }
 
         res.json(photoData)
