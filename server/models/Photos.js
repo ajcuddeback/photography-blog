@@ -18,6 +18,11 @@ const photoSchema = new Schema(
             type: Number,
             required: false
         },
+        is_featured: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
         tags: 
             {
             type: Schema.Types.ObjectId,
