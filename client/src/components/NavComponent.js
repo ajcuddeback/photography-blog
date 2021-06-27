@@ -1,5 +1,11 @@
 import React from 'react';
+// Dependencies
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+// Images
+import logo from '../images/logo.jpg'
+
 
 const NavComponent = () => {
 
@@ -9,13 +15,13 @@ const NavComponent = () => {
                 <div className="nav-wrapper">
                     <div className="logo">
                         <div className="img">
-                            <h2>Img Placeholder</h2>
+                            <img src={logo} alt="" />
                         </div>
                     </div>
                     <div className="links">
-                        <p>Home</p>
-                        <p>Gallery</p>
-                        <p>About</p>
+                        <Link to='/'>Home</Link>
+                        <Link to='/gallery'>Gallery</Link>
+                        <Link to='/about'>About</Link>
                     </div>
                 </div>
             </StyledNav>
@@ -24,21 +30,28 @@ const NavComponent = () => {
 };
 
 const StyledNav = styled.div` 
-    background-color: #202040;
+    background-color: #1f1d42;
     
 
     .nav-wrapper {
-        width: 1640px;
-        margin: 0 auto;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
         height: 100px;
         .logo {
+            .img {
+                img {
+                    width: 100px;
+                }
+            }
         }
         .links {
             display: flex;
             justify-content: space-between;
+            p {
+                margin-left: 3rem;
+                font-size: 24px;
+            }
         }
     }
 

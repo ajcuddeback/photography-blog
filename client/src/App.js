@@ -1,5 +1,12 @@
 import React from 'react';
 
+// Dependencies
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+ } from 'react-router-dom';
+
 // Components
 import AboutComponent from './components/AboutComponent';
 import AdminComponent from './components/AdminComponent';
@@ -11,10 +18,24 @@ import GlobalStyle from './components/GlobalStyles';
 
 function App() {
   return (
-    <div className="App">
-      <GlobalStyle />
-      <NavComponent />
-    </div>
+    <Router>
+      <div className="App">
+        <GlobalStyle />
+        <NavComponent />
+      </div>
+
+      <Switch>
+        <Route path='/gallery'>
+          <GalleryComponent />
+        </Route>
+        <Route path='/about'>
+          <AboutComponent />
+        </Route>
+        <Route path='/'>
+          <HomeComponent />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
