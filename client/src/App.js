@@ -14,6 +14,7 @@ import GalleryComponent from './components/GalleryComponent';
 import HomeComponent from './components/HomeComponent';
 import LoginComponent from './components/LoginComponent';
 import NavComponent from './components/NavComponent';
+import Page404Component from './components/Page404Component';
 import GlobalStyle from './components/GlobalStyles';
 
 function App() {
@@ -21,18 +22,26 @@ function App() {
     <Router>
       <div className="App">
         <GlobalStyle />
-        <NavComponent />
       </div>
 
       <Switch>
         <Route path='/gallery'>
+          <NavComponent />
           <GalleryComponent />
         </Route>
         <Route path='/about'>
+          <NavComponent />
           <AboutComponent />
         </Route>
-        <Route path='/'>
+        <Route path='/login'>
+          <LoginComponent />
+        </Route>
+        <Route exact path='/'>
+          <NavComponent />
           <HomeComponent />
+        </Route>
+        <Route path='*'>
+          <Page404Component />
         </Route>
       </Switch>
     </Router>
