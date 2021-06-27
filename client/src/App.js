@@ -13,6 +13,9 @@ import AdminComponent from './components/AdminComponent';
 import GalleryComponent from './components/GalleryComponent';
 import HomeComponent from './components/HomeComponent';
 import LoginComponent from './components/LoginComponent';
+import ForgotPasswordComponent from './components/ForgotPasswordComponent';
+import ResetPWComponent from './components/ResetPWComponent';
+import SubmitCodeComponent from './components/SubmitCodeComponent';
 import NavComponent from './components/NavComponent';
 import Page404Component from './components/Page404Component';
 import GlobalStyle from './components/GlobalStyles';
@@ -35,6 +38,15 @@ function App() {
         </Route>
         <Route path='/login'>
           <LoginComponent />
+        </Route>
+        <Route path='/forgot-password'>
+          <ForgotPasswordComponent />
+        </Route>
+        <Route path='/submit-code'>
+          <SubmitCodeComponent />
+        </Route>
+        <Route path='/reset-pw'>
+          <ResetPWComponent />
         </Route>
         <Route exact path='/'>
           <NavComponent />

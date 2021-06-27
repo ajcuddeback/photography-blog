@@ -17,7 +17,9 @@ const LoginComponent = () => {
                     <input type="text" name="email" id="email" />
                     <label htmlFor="email">Password:</label>
                     <input type="password" name="password" id="password" />
+                    <button type="submit">Login</button>
                 </form>
+                <Link to='/forgot-password'>Forgot Password?</Link>
             </div>
         </>
     )

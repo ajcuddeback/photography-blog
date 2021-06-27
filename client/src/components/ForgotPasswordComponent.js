@@ -2,7 +2,6 @@ import React from 'react';
 import { useLocation } from 'react-router';
 
 const ForgotPasswordComponent = () => {
-    let location = useLocation();
 
     return (
         <>
