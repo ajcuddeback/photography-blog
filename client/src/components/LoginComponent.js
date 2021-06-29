@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // Images
-import logo from '../images/logo.jpg'
+import logo from '../images/logo1.jpg'
 
 const LoginComponent = () => {
 

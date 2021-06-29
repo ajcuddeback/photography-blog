@@ -27,7 +27,7 @@ router.route('/upload').post(authMiddleware, upload.single('file'), addPhoto);
 
 router.route('/comment/:id').put(addComment);
 
-router.route('/comment/:id/:photoId').put(deleteComment);
+router.route('/comment/:id/:photoId').put(authMiddleware ,deleteComment);
 
 router.route('/delete/:key').delete(authMiddleware, deletePhoto);
 
