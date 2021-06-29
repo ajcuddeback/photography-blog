@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Dependencies
 import {
@@ -21,6 +21,9 @@ import Page404Component from './components/Page404Component';
 import GlobalStyle from './components/GlobalStyles';
 
 function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <Router>
       <div className="App">
@@ -37,7 +40,7 @@ function App() {
           <AboutComponent />
         </Route>
         <Route path='/login'>
-          <LoginComponent />
+          <LoginComponent setIsLoggedIn={setIsLoggedIn} />
         </Route>
         <Route path='/forgot-password'>
           <ForgotPasswordComponent />
