@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // Dependencies
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Auth from '../utils/auth';
 
 // Images
 import logo from '../images/logo.jpg'
 
 
-const NavComponent = () => {
+const NavComponent = ({ isLoggedIn }) => {
+    const logout = () => {
+        Auth.logout();
+        document.location.assign('/');
+    }
 
     return (
         <>
@@ -22,6 +27,8 @@ const NavComponent = () => {
                         <Link to='/'>Home</Link>
                         <Link to='/gallery'>Gallery</Link>
                         <Link to='/about'>About</Link>
+                        {isLoggedIn ? (<Link to='/admin'>Admin</Link>) : ''}
+                        {isLoggedIn ? (<button onClick={logout}>Logout</button>) : ''}
                     </div>
                 </div>
             </StyledNav>

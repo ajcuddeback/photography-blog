@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Dependencies
 import {
@@ -6,6 +6,7 @@ import {
   Switch,
   Route
  } from 'react-router-dom';
+ import Auth from './utils/auth';
 
 // Components
 import AboutComponent from './components/AboutComponent';
@@ -22,7 +23,19 @@ import GlobalStyle from './components/GlobalStyles';
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState();
+  
+  useEffect(() => {
+    const loggedIn = Auth.loggedIn();
+    console.log(loggedIn);
+    if (loggedIn) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+
+    console.log(isLoggedIn)
+  }, [isLoggedIn])
 
   return (
     <Router>
@@ -31,12 +44,19 @@ function App() {
       </div>
 
       <Switch>
+        {isLoggedIn ? (
+          <Route path='/admin'>
+          <NavComponent isLoggedIn={isLoggedIn} />
+          <AdminComponent />
+        </Route>
+        ): ''}
         <Route path='/gallery'>
-          <NavComponent />
+          <NavComponent isLoggedIn={isLoggedIn} />
           <GalleryComponent />
         </Route>
+        
         <Route path='/about'>
-          <NavComponent />
+          <NavComponent isLoggedIn={isLoggedIn} />
           <AboutComponent />
         </Route>
         <Route path='/login'>
@@ -52,7 +72,7 @@ function App() {
           <ResetPWComponent />
         </Route>
         <Route exact path='/'>
-          <NavComponent />
+          <NavComponent isLoggedIn={isLoggedIn} />
           <HomeComponent />
         </Route>
         <Route path='*'>
