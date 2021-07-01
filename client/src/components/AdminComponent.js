@@ -5,8 +5,9 @@ import { getTags } from '../utils/API';
 import TagsComponent from './TagsComponent';
 
 const AdminComponent = () => {
-    const [firstName, setFirstName] = useState('')
-    const [tags, setTags] = useState([])
+    const [firstName, setFirstName] = useState('');
+    const [tags, setTags] = useState([]);
+    const [formData, setFormData] = useState({ title: '', description: '', alttext: '', price: 0, tagsIndex: 0, file: {} });
     
     useEffect(async () => {
         setFirstName(localStorage.getItem('firstName'));
@@ -23,26 +24,43 @@ const AdminComponent = () => {
         } catch (err) {
             console.log(err)
         }
-    }, [])
+    }, []);
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({...formData, [name]: value});
+    };
+    const handleOptionChange = (e) => {
+        const index = e.target.options.selectedIndex;
+        const { name } = e.target;
+        setFormData({...formData, [name]: index});
+    }
+    const handleImgChange = (e) => {
+        const { name } = e.target;
+        const data = e.target.files[0];
+
+        setFormData({...formData, [name]: data})
+    }
+
     return (
         <>
             <h1>Welcome back {firstName}</h1>
             <h2>Add an image:</h2>
-            <form>
+            <form encType="multipart/form-data">
                 <label htmlFor="title">Title: </label>
-                <input type="text" name="title" />
+                <input onChange={handleInputChange} type="text" name="title" />
                 <label htmlFor="description">Description</label>
-                <input type="text" name="description" />
+                <input onChange={handleInputChange} type="text" name="description" />
                 <label htmlFor="alttext">Alt Text: </label>
-                <input type="text" name="alttext" />
+                <input onChange={handleInputChange} type="text" name="alttext" />
                 <label htmlFor="price">Price</label>
-                <input type="number" name="price" />
+                <input onChange={handleInputChange} type="number" name="price" />
                 <label htmlFor="tag">Associate Tag: </label>
-                <select name="tag" id="tag">
-                    {tags.map(tag => (<TagsComponent tag={tag} />))}
+                <select onChange={handleOptionChange} name="tagsIndex" id="tag">
+                    {tags.map(tag => (<TagsComponent tag={tag} key={tag._id} />))}
                 </select>
                 <label htmlFor="img">Image: </label>
-                <input type="file" name="img" />
+                <input onChange={handleImgChange} type="file" name="file" />
                 <button type="submit">Submit</button>
             </form>
         </>
