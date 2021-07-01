@@ -29,6 +29,8 @@ const LoginComponent = ({ setIsLoggedIn }) => {
 
             const { token, user } = await response.json();
 
+            localStorage.setItem('firstName', user.first_name);
+
             Auth.login(token);
             setIsLoggedIn(true);
             

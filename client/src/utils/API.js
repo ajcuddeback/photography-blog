@@ -7,3 +7,7 @@ export const loginUser = (userData) => {
         body: JSON.stringify(userData)
     });
 };
+
+export const getTags = () => {
+    return fetch ('/api/photos/tags');
+}

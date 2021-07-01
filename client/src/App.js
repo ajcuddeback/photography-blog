@@ -27,14 +27,11 @@ function App() {
   
   useEffect(() => {
     const loggedIn = Auth.loggedIn();
-    console.log(loggedIn);
     if (loggedIn) {
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
     }
-
-    console.log(isLoggedIn)
   }, [isLoggedIn])
 
   return (
