@@ -23,8 +23,10 @@ import GlobalStyle from './components/GlobalStyles';
 
 function App() {
 
+  // State
   const [isLoggedIn, setIsLoggedIn] = useState();
   
+  // Use effect hook to check if user is logged in everytime they visit a new page or login, that way if a user logs out, they will not be able to view any secure components.
   useEffect(() => {
     const loggedIn = Auth.loggedIn();
     if (loggedIn) {

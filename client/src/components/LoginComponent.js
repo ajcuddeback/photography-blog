@@ -11,16 +11,21 @@ import logo from '../images/logo1.jpg'
 
 const LoginComponent = ({ setIsLoggedIn }) => {
 
+    // State
     const [formData, setFormData] = useState({ username: '', password: '' });
 
+    // Handle input function
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
     }
 
+    // Handle submission of login form
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            // Get the response from loginUser function and parse out the token and user. 
+            // Set the firstname that comes back into local storage for use in admin, save token into Auth for later use and set is logged in to true initially
             const response = await loginUser(formData);
 
             if(!response.ok) {
@@ -63,6 +68,7 @@ const LoginComponent = ({ setIsLoggedIn }) => {
     )
 }
 
+// Styles
 const StyledLogin = styled.div`
     div {
         display: flex;

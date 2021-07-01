@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react';
 
+// Api function
 import { getTags } from '../utils/API';
 
+// Components
 import TagsComponent from './TagsComponent';
 
 const AdminComponent = () => {
+    // State
     const [firstName, setFirstName] = useState('');
     const [tags, setTags] = useState([]);
     const [formData, setFormData] = useState({ title: '', description: '', alttext: '', price: 0, tagsIndex: 0, file: {} });
     
+    // Use effect hook
     useEffect(async () => {
+        // Get the first name out of localstorage in order to keep the first name active on page even after refresh
         setFirstName(localStorage.getItem('firstName'));
+
         try {
+            // Get all tags and parse them and save them to state for use in the select form
             const response = await getTags();
 
             if(!response.ok) {
@@ -26,19 +33,21 @@ const AdminComponent = () => {
         }
     }, []);
 
+    // Handles text and number changes in inputs
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({...formData, [name]: value});
     };
+    // Handles the select changes in select
     const handleOptionChange = (e) => {
         const index = e.target.options.selectedIndex;
         const { name } = e.target;
         setFormData({...formData, [name]: index});
     }
+    // Handles the img upload
     const handleImgChange = (e) => {
         const { name } = e.target;
         const data = e.target.files[0];
-
         setFormData({...formData, [name]: data})
     }
 
@@ -56,6 +65,7 @@ const AdminComponent = () => {
                 <label htmlFor="price">Price</label>
                 <input onChange={handleInputChange} type="number" name="price" />
                 <label htmlFor="tag">Associate Tag: </label>
+                {/* Map out all of the tags to options */}
                 <select onChange={handleOptionChange} name="tagsIndex" id="tag">
                     {tags.map(tag => (<TagsComponent tag={tag} key={tag._id} />))}
                 </select>
