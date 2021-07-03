@@ -9,6 +9,7 @@ const {
     getPhoto,
     getTags,
     getPhotoByTag,
+    getFeaturedPhoto,
     getPhotos,
     deletePhoto,
     addComment,
@@ -20,6 +21,8 @@ router.route('/').get(getPhotos);
 router.route('/tags').get(getTags);
 
 router.route('/tags/:tags').get(getPhotoByTag);
+
+router.route('/featured').get(getFeaturedPhoto);
 
 router.route('/:id').get(getPhoto);
 

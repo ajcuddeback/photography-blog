@@ -29,4 +29,8 @@ export const postPhoto = (photoData, token) => {
         },
         body: fd
     });
-}
+};
+
+export const getFeaturedImage = () => {
+    return fetch('/api/photos/featured');
+};

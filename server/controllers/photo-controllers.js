@@ -3,6 +3,7 @@ const { uploadFile, deleteObject }  = require('../utils/s3');
 const fs = require('fs');
 require('dotenv').config();
 const multer = require('multer');
+const { resolve } = require('path');
 const upload = multer({ dest: 'uploads/' });
 
 module.exports = {
@@ -35,6 +36,16 @@ module.exports = {
 
         if(!photoData) {
             res.status(400).json({ message: 'No Photos associated with this tag!' });
+            return;
+        }
+
+        res.json(photoData);
+    },
+    async getFeaturedPhoto(req, res) {
+        const photoData = await Photo.find({ is_featured: true });
+
+        if(!photoData) {
+            res.status(400).json({ message: 'There is no featured photo!' });
             return;
         }
 
