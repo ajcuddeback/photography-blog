@@ -22,7 +22,8 @@
   "homepage": "https://github.com/ajcuddeback/photography-blog#readme",
   "dependencies": {
     "axios": "^0.21.1",
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "spin.js": "^4.1.0"
   },
   "devDependencies": {
     "concurrently": "^6.1.0"

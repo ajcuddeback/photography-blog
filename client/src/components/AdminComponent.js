@@ -5,7 +5,8 @@ import { getTags, postPhoto } from '../utils/API';
 import Auth from '../utils/auth';
 
 // Components
-import TagsComponent from './TagsComponent';
+import TagsComponent from './sub-components/TagsComponent';
+import SpinnerComponent from './sub-components/SpinnerComponent';
 
 import styled from 'styled-components';
 
@@ -14,7 +15,8 @@ const AdminComponent = () => {
     const [firstName, setFirstName] = useState('');
     const [tags, setTags] = useState([]);
     const [formData, setFormData] = useState({ title: '', description: '', alttext: '', price: 0, is_featured: false, tagsIndex: 0, file: {} });
-    const [src, setSrc] = useState('https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image-300x225.png')
+    const [src, setSrc] = useState('https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image-300x225.png');
+    const [isLoaded, setIsLoaded] = useState(true);
     
     // Use effect hook
     useEffect(async () => {
@@ -70,6 +72,7 @@ const AdminComponent = () => {
 
     // Handles the submission of an image
     const handleSubmit = async (e) => {
+        setIsLoaded(false);
         e.preventDefault();
         try {
             const isLoggedIn = await Auth.loggedIn();
@@ -84,6 +87,7 @@ const AdminComponent = () => {
             const data = response.json();
             setFormData({ title: '', description: '', alttext: '', price: 0, is_featured: false, tagsIndex: 0, file: {} })
             setSrc('https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image-300x225.png')
+            setIsLoaded(true);
         } catch (error) {
             console.error(error)
         }
@@ -121,7 +125,8 @@ const AdminComponent = () => {
                     <label htmlFor="is_featured">Main Featured Image? </label>
                     <input onChange={updateIsFeatured} checked={formData.is_featured} type="checkbox" name="is_featured" />
                     <br />
-                    <img src={src} alt="your image" />
+                    {isLoaded ? (<img src={src} alt="your image" />) : (<SpinnerComponent />)}
+                    
                 </div>
                 <button type="submit">Submit</button>
             </form>

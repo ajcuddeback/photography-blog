@@ -4,9 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { getFeaturedImage } from '../utils/API';
 import styled from 'styled-components';
 
+// Components
+import SpinnerComponent from './sub-components/SpinnerComponent';
+
 const HomeComponent = () => {
 
     const [featuredSrc, setFeaturedSrc] = useState('');
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(async () => {
         try {
@@ -19,6 +23,7 @@ const HomeComponent = () => {
 
             const photoData = await response.json();
             setFeaturedSrc(photoData.fileLink);
+            setIsLoaded(true);
 
         } catch (error) {
             console.error(error);
@@ -28,7 +33,7 @@ const HomeComponent = () => {
     return (
         <StyledDiv>
             <h1>Welcome</h1>
-            <img src={featuredSrc} alt="" />
+            { isLoaded ? (<img src={featuredSrc} alt="" />) : (<SpinnerComponent />) }
         </StyledDiv>
     )
 }
