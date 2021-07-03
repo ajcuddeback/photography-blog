@@ -12,6 +12,7 @@ const AdminComponent = () => {
     const [firstName, setFirstName] = useState('');
     const [tags, setTags] = useState([]);
     const [formData, setFormData] = useState({ title: '', description: '', alttext: '', price: 0, tagsIndex: 0, file: {} });
+    const [src, setSrc] = useState('https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image-300x225.png')
     
     // Use effect hook
     useEffect(async () => {
@@ -49,6 +50,12 @@ const AdminComponent = () => {
     const handleImgChange = async (e) => {
         const { name } = e.target;
         const data = e.target.files[0];
+        // Grab the file out of the file uploader
+        const [file] = e.target.files;
+        // If there is a file, create a url for it and store it in state in order to preview it
+        if(file) {
+            setSrc(URL.createObjectURL(file))
+        }
         setFormData({...formData, [name]: data})
     }
 
@@ -92,6 +99,9 @@ const AdminComponent = () => {
                 </select>
                 <label htmlFor="img">Image: </label>
                 <input onChange={handleImgChange} type="file" name="file" />
+                <div className="img-preview">
+                    <img src={src} alt="your image" />
+                </div>
                 <button type="submit">Submit</button>
             </form>
         </>
