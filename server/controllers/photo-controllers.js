@@ -42,7 +42,7 @@ module.exports = {
         res.json(photoData);
     },
     async getFeaturedPhoto(req, res) {
-        const photoData = await Photo.find({ is_featured: true });
+        const photoData = await Photo.findOne({ is_featured: true });
 
         if(!photoData) {
             res.status(400).json({ message: 'There is no featured photo!' });
