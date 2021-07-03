@@ -7,6 +7,8 @@ import Auth from '../utils/auth';
 // Components
 import TagsComponent from './TagsComponent';
 
+import styled from 'styled-components';
+
 const AdminComponent = () => {
     // State
     const [firstName, setFirstName] = useState('');
@@ -80,32 +82,81 @@ const AdminComponent = () => {
     }
 
     return (
-        <>
+        <StyledDiv>
             <h1>Welcome back {firstName}</h1>
             <h2>Add an image:</h2>
             <form onSubmit={handleSubmit} encType="multipart/form-data" >
-                <label htmlFor="title">Title: </label>
-                <input onChange={handleInputChange} type="text" name="title" />
-                <label htmlFor="description">Description</label>
-                <input onChange={handleInputChange} type="text" name="description" />
-                <label htmlFor="alttext">Alt Text: </label>
-                <input onChange={handleInputChange} type="text" name="alttext" />
-                <label htmlFor="price">Price</label>
-                <input onChange={handleInputChange} type="number" name="price" />
-                <label htmlFor="tag">Associate Tag: </label>
-                {/* Map out all of the tags to options */}
-                <select onChange={handleOptionChange} name="tagsIndex" id="tag">
-                    {tags.map(tag => (<TagsComponent tag={tag} key={tag._id} />))}
-                </select>
-                <label htmlFor="img">Image: </label>
-                <input onChange={handleImgChange} type="file" name="file" />
+                <div className="wrapper">
+                    <div className="col1">
+                        <label htmlFor="title">Title: </label>
+                        <input onChange={handleInputChange} type="text" name="title" />
+                        <label htmlFor="description">Description</label>
+                        <input onChange={handleInputChange} type="text" name="description" />
+                        <label htmlFor="alttext">Alt Text: </label>
+                        <input onChange={handleInputChange} type="text" name="alttext" />
+                    </div>
+                    <div className="col2">
+                        <label htmlFor="price">Price</label>
+                        <input onChange={handleInputChange} type="number" name="price" />
+                        <label htmlFor="tag">Associate Tag: </label>
+                        {/* Map out all of the tags to options */}
+                        <select onChange={handleOptionChange} name="tagsIndex" id="tag">
+                            {tags.map(tag => (<TagsComponent tag={tag} key={tag._id} />))}
+                        </select>
+                        <label htmlFor="img">Image: </label>
+                        <input className="img-select" onChange={handleImgChange} type="file" name="file" />
+                    </div>
+                </div>
+                <br />
                 <div className="img-preview">
+                    <h2>Preview Image:</h2>
+                    <br />
                     <img src={src} alt="your image" />
                 </div>
                 <button type="submit">Submit</button>
             </form>
-        </>
+            
+        </StyledDiv>
     )
 }
+
+const StyledDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 600px;
+        height: 500px;
+        .img-preview {
+            img {
+                max-width: 500px;
+                border: 1px solid #B030B0;
+                border-radius: 5px;
+            }
+        }
+        .wrapper {
+            display: flex;
+            width: 100%;
+            div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                .img-select {
+                    width: 90%;
+                    margin-left: 2rem;
+                }
+            }
+        }
+        button {
+            align-self: center;
+        }
+        
+    }
+`
 
 export default AdminComponent
