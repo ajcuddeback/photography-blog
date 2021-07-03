@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 // Api function
-import { getTags } from '../utils/API';
+import { getTags, postPhoto } from '../utils/API';
+import Auth from '../utils/auth';
 
 // Components
 import TagsComponent from './TagsComponent';
@@ -45,17 +46,37 @@ const AdminComponent = () => {
         setFormData({...formData, [name]: index});
     }
     // Handles the img upload
-    const handleImgChange = (e) => {
+    const handleImgChange = async (e) => {
         const { name } = e.target;
         const data = e.target.files[0];
         setFormData({...formData, [name]: data})
+    }
+
+    // Handles the submission of an image
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const isLoggedIn = await Auth.loggedIn();
+            if(!isLoggedIn) {
+                return new Error('You are not allowed to access this route!')
+            } 
+            const token = await Auth.getToken();
+            const response = await postPhoto(formData, token);
+            if(!response) {
+                return new Error('Error while trying to post photo!')
+            }
+            const data = response.json();
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     return (
         <>
             <h1>Welcome back {firstName}</h1>
             <h2>Add an image:</h2>
-            <form encType="multipart/form-data">
+            <form onSubmit={handleSubmit} encType="multipart/form-data" >
                 <label htmlFor="title">Title: </label>
                 <input onChange={handleInputChange} type="text" name="title" />
                 <label htmlFor="description">Description</label>

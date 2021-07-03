@@ -16,6 +16,7 @@ const s3bucket = new S3({
 });
 
 function uploadFile(file) {
+    console.log(file)
     // Create a file stream to save the file to s3
     const fileStream = fs.createReadStream(file.path);
 

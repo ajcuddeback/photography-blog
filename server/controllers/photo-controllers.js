@@ -2,6 +2,8 @@ const { Photo, Comment, Tag } = require('../models');
 const { uploadFile, deleteObject }  = require('../utils/s3');
 const fs = require('fs');
 require('dotenv').config();
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 module.exports = {
     async getPhotos(req, res) {
