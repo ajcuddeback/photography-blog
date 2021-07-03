@@ -49,7 +49,7 @@ module.exports = {
             description: req.body.description,
             alttext: req.body.alttext,
             price: req.body.price,
-            is_featured: req.body.featured,
+            is_featured: req.body.is_featured,
             tags: tags[req.body.tagsIndex]._id,
             fileLink: `https://${process.env.AWS_ClOUDFRONT_DOMAIN}.cloudfront.net/${result.Key}`,
             s3_key: result.Key

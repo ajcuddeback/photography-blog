@@ -21,6 +21,7 @@ const photoSchema = new Schema(
         is_featured: {
             type: Boolean,
             required: true,
+            unique: true,
             default: false
         },
         tags: 

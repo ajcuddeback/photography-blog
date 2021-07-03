@@ -13,7 +13,7 @@ const AdminComponent = () => {
     // State
     const [firstName, setFirstName] = useState('');
     const [tags, setTags] = useState([]);
-    const [formData, setFormData] = useState({ title: '', description: '', alttext: '', price: 0, tagsIndex: 0, file: {} });
+    const [formData, setFormData] = useState({ title: '', description: '', alttext: '', price: 0, is_featured: false, tagsIndex: 0, file: {} });
     const [src, setSrc] = useState('https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image-300x225.png')
     
     // Use effect hook
@@ -61,10 +61,16 @@ const AdminComponent = () => {
         setFormData({...formData, [name]: data})
     }
 
+    const updateIsFeatured = async (e) => {
+        const { name } = e.target;
+        const value = e.target.checked;
+
+        setFormData({ ...formData, [name]: value });
+    }
+
     // Handles the submission of an image
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
             const isLoggedIn = await Auth.loggedIn();
             if(!isLoggedIn) {
@@ -76,6 +82,8 @@ const AdminComponent = () => {
                 return new Error('Error while trying to post photo!')
             }
             const data = response.json();
+            setFormData({ title: '', description: '', alttext: '', price: 0, is_featured: false, tagsIndex: 0, file: {} })
+            setSrc('https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image-300x225.png')
         } catch (error) {
             console.error(error)
         }
@@ -89,15 +97,15 @@ const AdminComponent = () => {
                 <div className="wrapper">
                     <div className="col1">
                         <label htmlFor="title">Title: </label>
-                        <input onChange={handleInputChange} type="text" name="title" />
+                        <input onChange={handleInputChange} value={formData.title} type="text" name="title" />
                         <label htmlFor="description">Description</label>
-                        <input onChange={handleInputChange} type="text" name="description" />
+                        <input onChange={handleInputChange} value={formData.description} type="text" name="description" />
                         <label htmlFor="alttext">Alt Text: </label>
-                        <input onChange={handleInputChange} type="text" name="alttext" />
+                        <input onChange={handleInputChange} value={formData.alttext} type="text" name="alttext" />
                     </div>
                     <div className="col2">
                         <label htmlFor="price">Price</label>
-                        <input onChange={handleInputChange} type="number" name="price" />
+                        <input onChange={handleInputChange} value={formData.price} type="number" name="price" />
                         <label htmlFor="tag">Associate Tag: </label>
                         {/* Map out all of the tags to options */}
                         <select onChange={handleOptionChange} name="tagsIndex" id="tag">
@@ -110,6 +118,8 @@ const AdminComponent = () => {
                 <br />
                 <div className="img-preview">
                     <h2>Preview Image:</h2>
+                    <label htmlFor="is_featured">Main Featured Image? </label>
+                    <input onChange={updateIsFeatured} checked={formData.is_featured} type="checkbox" name="is_featured" />
                     <br />
                     <img src={src} alt="your image" />
                 </div>
