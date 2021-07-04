@@ -12,6 +12,7 @@ import {
 import AboutComponent from './components/pages/AboutComponent';
 import AdminComponent from './components/pages/AdminComponent';
 import GalleryComponent from './components/pages/GalleryComponent';
+import SingleImageComponent from './components/pages/SingleImageComponent';
 import HomeComponent from './components/pages/HomeComponent';
 import LoginComponent from './components/pages/LoginComponent';
 import ForgotPasswordComponent from './components/pages/reset-password/ForgotPasswordComponent';
@@ -52,6 +53,10 @@ function App() {
         <Route path='/gallery'>
           <NavComponent isLoggedIn={isLoggedIn} />
           <GalleryComponent />
+        </Route>
+        <Route path='/image/:id'>
+          <NavComponent isLoggedIn={isLoggedIn} />
+          <SingleImageComponent />
         </Route>
         
         <Route path='/about'>

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Masonry from 'react-masonry-css';
+import './style.css';
 
 // Dependencies
 import { getAllImages } from '../../utils/API';
@@ -19,11 +21,20 @@ const GalleryComponent = () => {
         
         let data = await response.json();
         setImages(data)
-    }, [])
+    }, []);
+
+    const breakpointColumnsObj = {
+        default: 3,
+        1520: 3,
+        1500: 2,
+        700: 1
+      };
 
     return (
         <>
-            { images.map(image => (<EachImageComponent image={image} key={images._id} />)) }
+            <Masonry  breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
+                { images.map(image => (<EachImageComponent image={image} key={images._id} />)) }
+            </Masonry>
         </>
     )
 
