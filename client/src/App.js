@@ -9,16 +9,16 @@ import {
  import Auth from './utils/auth';
 
 // Components
-import AboutComponent from './components/AboutComponent';
-import AdminComponent from './components/AdminComponent';
-import GalleryComponent from './components/GalleryComponent';
-import HomeComponent from './components/HomeComponent';
-import LoginComponent from './components/LoginComponent';
-import ForgotPasswordComponent from './components/ForgotPasswordComponent';
-import ResetPWComponent from './components/ResetPWComponent';
-import SubmitCodeComponent from './components/SubmitCodeComponent';
+import AboutComponent from './components/pages/AboutComponent';
+import AdminComponent from './components/pages/AdminComponent';
+import GalleryComponent from './components/pages/GalleryComponent';
+import HomeComponent from './components/pages/HomeComponent';
+import LoginComponent from './components/pages/LoginComponent';
+import ForgotPasswordComponent from './components/pages/reset-password/ForgotPasswordComponent';
+import ResetPWComponent from './components/pages/reset-password/ResetPWComponent';
+import SubmitCodeComponent from './components/pages/reset-password/SubmitCodeComponent';
 import NavComponent from './components/NavComponent';
-import Page404Component from './components/Page404Component';
+import Page404Component from './components/pages/Page404Component';
 import GlobalStyle from './components/GlobalStyles';
 
 function App() {

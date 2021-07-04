@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 // Dependencies
-import { getFeaturedImage } from '../utils/API';
+import { getFeaturedImage } from '../../utils/API';
 import styled from 'styled-components';
 
 // Components
-import SpinnerComponent from './sub-components/SpinnerComponent';
+import SpinnerComponent from '../sub-components/SpinnerComponent';
 
 const HomeComponent = () => {
 

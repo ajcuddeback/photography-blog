@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 
 // Dependencies
 import { Link } from 'react-router-dom';
-import Auth from '../utils/auth';
-import { loginUser } from '../utils/API';
+import Auth from '../../utils/auth';
+import { loginUser } from '../../utils/API';
 import styled from 'styled-components';
 
 // Images
-import logo from '../images/logo1.jpg'
+import logo from '../../images/logo1.jpg'
 
 const LoginComponent = ({ setIsLoggedIn }) => {
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 // Api function
-import { getTags, postPhoto } from '../utils/API';
-import Auth from '../utils/auth';
+import { getTags, postPhoto } from '../../utils/API';
+import Auth from '../../utils/auth';
 
 // Components
-import TagsComponent from './sub-components/TagsComponent';
-import SpinnerComponent from './sub-components/SpinnerComponent';
+import TagsComponent from '../sub-components/TagsComponent';
+import SpinnerComponent from '../sub-components/SpinnerComponent';
 
 import styled from 'styled-components';
 
