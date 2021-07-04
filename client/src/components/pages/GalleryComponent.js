@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 // Dependencies
 import { getAllImages } from '../../utils/API';
 
+// Components
+import EachImageComponent from '../sub-components/Images/EachImageComponent';
+
 const GalleryComponent = () => {
     
     const [images, setImages] = useState([])
@@ -20,7 +23,7 @@ const GalleryComponent = () => {
 
     return (
         <>
-            
+            { images.map(image => (<EachImageComponent image={image} key={images._id} />)) }
         </>
     )
 
