@@ -23,30 +23,26 @@ const GalleryComponent = () => {
     }, []);
 
     return (
-        <StyledDiv>
-            <div className='container'>
+        <>
+            <StyledDiv>
                 { images.map(image => (<EachImageComponent image={image} key={images._id} />)) }
-            </div>
-        </StyledDiv>
+            </StyledDiv>
+        </>
     )
 
 }
 
 const StyledDiv = styled.div`
-    .container {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        column-gap: 0px;
+    columns: 4;
+    column-gap: 2px;
+    @media (max-width: 2000px) {
+        columns: 3;
     }
-    @media (max-width: 890px) {
-        .container {
-            grid-template-columns: 1fr 1fr;
-        }
+    @media (max-width: 850px) {
+        columns: 2;
     }
-    @media (max-width: 550px) {
-        .container {
-            grid-template-columns: 1fr;
-        }
+    @media (max-width: 700px) {
+        columns: 1;
     }
 `
 
