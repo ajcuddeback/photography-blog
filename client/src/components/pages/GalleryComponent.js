@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Masonry from 'react-masonry-css';
-import './style.css';
 
 // Dependencies
 import { getAllImages } from '../../utils/API';
+import styled from 'styled-components';
 
 // Components
 import EachImageComponent from '../sub-components/Images/EachImageComponent';
@@ -23,21 +22,32 @@ const GalleryComponent = () => {
         setImages(data)
     }, []);
 
-    const breakpointColumnsObj = {
-        default: 3,
-        1520: 3,
-        1500: 2,
-        700: 1
-      };
-
     return (
-        <>
-            <Masonry  breakpointCols={breakpointColumnsObj} className="my-masonry-grid" columnClassName="my-masonry-grid_column">
+        <StyledDiv>
+            <div className='container'>
                 { images.map(image => (<EachImageComponent image={image} key={images._id} />)) }
-            </Masonry>
-        </>
+            </div>
+        </StyledDiv>
     )
 
 }
+
+const StyledDiv = styled.div`
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 0px;
+    }
+    @media (max-width: 890px) {
+        .container {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    @media (max-width: 550px) {
+        .container {
+            grid-template-columns: 1fr;
+        }
+    }
+`
 
 export default GalleryComponent

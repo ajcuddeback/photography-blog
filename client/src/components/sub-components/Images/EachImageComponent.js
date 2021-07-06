@@ -18,17 +18,7 @@ const EachImageComponent = ({ image }) => {
 
 const StyledDiv = styled.div`
     .image {
-        max-width: 500px;
-    }
-    @media (max-width: 1065px) {
-        .image {
-            max-width: 400px;
-        }
-    }
-    @media (max-width: 850px) {
-        .image {
-            max-width: 350px;
-        }
+        width: 90%;
     }
 `
 
