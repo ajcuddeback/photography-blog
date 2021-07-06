@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
 // Dependencies
-import { getAllImages } from '../../utils/API';
+import { getTags, getAllImages } from '../../utils/API';
 import styled from 'styled-components';
 
 // Components
 import EachImageComponent from '../sub-components/Images/EachImageComponent';
+import TagsComponent from '../sub-components/TagsComponent';
 
 const GalleryComponent = () => {
     
     const [images, setImages] = useState([])
+    const [tags, setTags] = useState([]);
 
     useEffect( async () => {
         const response = await getAllImages();
@@ -20,11 +22,30 @@ const GalleryComponent = () => {
         
         let data = await response.json();
         setImages(data)
+
+        try {
+            // Get all tags and parse them and save them to state for use in the select form
+            const response = await getTags();
+
+            if(!response.ok) {
+                throw new Error('No tags found!');
+            }
+
+            const tags = await response.json();
+
+            setTags(tags);
+        } catch (err) {
+            console.log(err)
+        }
     }, []);
 
     return (
         <>
+             <select  name="tagsIndex" id="tag">
+                {tags.map(tag => (<TagsComponent tag={tag} key={tag._id} />))}
+            </select>
             <StyledDiv>
+               
                 { images.map(image => (<EachImageComponent image={image} key={images._id} />)) }
             </StyledDiv>
         </>
@@ -33,6 +54,7 @@ const GalleryComponent = () => {
 }
 
 const StyledDiv = styled.div`
+    margin-top: 1rem;
     columns: 4;
     column-gap: 2px;
     @media (max-width: 2000px) {
