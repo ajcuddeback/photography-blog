@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 // Dependencies
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const EachImageComponent = ({ image }) => {
     useEffect(() => {
@@ -13,8 +14,7 @@ const EachImageComponent = ({ image }) => {
         <StyledDiv>
             
             <Link to={'/images/' + image._id}>
-            <h1>{image.tags.tagName}</h1>
-                <img src={image.fileLink} alt={image.alttext} className='image' id={image.tags.tagName } />
+                <LazyLoadImage src={image.fileLink} alt={image.alttext} className='image' />
             </Link>
         </StyledDiv>
     )

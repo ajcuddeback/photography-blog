@@ -59,6 +59,7 @@ const GalleryComponent = () => {
             </select>
             <StyledDiv>
                 { isAll ? images.map(image => (<EachImageComponent image={image} key={images._id} />)) : images.filter(img => img.tags.tagName === selectedTag).map(image => (<EachImageComponent image={image} key={images._id} />)) }
+               
             </StyledDiv>
         </>
     )
