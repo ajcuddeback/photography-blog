@@ -9,9 +9,10 @@ import EachImageComponent from '../sub-components/Images/EachImageComponent';
 import TagsComponent from '../sub-components/TagsComponent';
 
 const GalleryComponent = () => {
-    
-    const [images, setImages] = useState([])
+    const [images, setImages] = useState([]);
     const [tags, setTags] = useState([]);
+    const [selectedTag, setSelectedTag] = useState('All')
+    const [isAll, setIsAll] = useState(true)
 
     useEffect( async () => {
         const response = await getAllImages();
@@ -21,7 +22,7 @@ const GalleryComponent = () => {
         }
         
         let data = await response.json();
-        setImages(data)
+        setImages(data);
 
         try {
             // Get all tags and parse them and save them to state for use in the select form
@@ -32,21 +33,32 @@ const GalleryComponent = () => {
             }
 
             const tags = await response.json();
+            tags.unshift({tagName: "All"});
 
             setTags(tags);
         } catch (err) {
             console.log(err)
         }
-    }, []);
+        
+    }, [selectedTag]);
+
+    const handleSelectChange = async (e) => {
+        setSelectedTag(e.target.value)
+        if(e.target.value === 'All') {
+            setIsAll(true);
+        } else {
+            setIsAll(false)
+        }
+        images.filter(img => img.tags.tagName !== selectedTag).map(image => console.log('-------' , image))
+    }
 
     return (
         <>
-             <select  name="tagsIndex" id="tag">
-                {tags.map(tag => (<TagsComponent tag={tag} key={tag._id} />))}
+             <select onChange={handleSelectChange} name="tagsIndex" id="tag">
+                { tags.map(tag => (<TagsComponent tag={tag} key={tag._id} />)) }
             </select>
             <StyledDiv>
-               
-                { images.map(image => (<EachImageComponent image={image} key={images._id} />)) }
+                { isAll ? images.map(image => (<EachImageComponent image={image} key={images._id} />)) : images.filter(img => img.tags.tagName === selectedTag).map(image => (<EachImageComponent image={image} key={images._id} />)) }
             </StyledDiv>
         </>
     )

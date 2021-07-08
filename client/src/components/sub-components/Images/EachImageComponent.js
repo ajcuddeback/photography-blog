@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // Dependencies
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const EachImageComponent = ({ image }) => {
+    useEffect(() => {
+        console.log(image)
+    }, [])
 
     return (
         <StyledDiv>
+            
             <Link to={'/images/' + image._id}>
-                <img src={image.fileLink} alt={image.alttext} className='image' />
+            <h1>{image.tags.tagName}</h1>
+                <img src={image.fileLink} alt={image.alttext} className='image' id={image.tags.tagName } />
             </Link>
         </StyledDiv>
     )

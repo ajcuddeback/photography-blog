@@ -38,3 +38,7 @@ export const getFeaturedImage = () => {
 export const getAllImages = () => {
     return fetch('/api/photos')
 };
+
+export const getPhotoByTag = (id) => {
+    return fetch(`/api/photos/tag/${id}`);
+}
