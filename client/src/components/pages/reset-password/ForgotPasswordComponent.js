@@ -22,7 +22,7 @@ const ForgotPasswordComponent = () => {
 
             const data = await response.json();
 
-            console.log(data);
+            window.location.assign('/submit-code');
         } catch (error) {
             console.error(error);
         }
