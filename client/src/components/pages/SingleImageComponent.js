@@ -7,7 +7,8 @@ import styled from 'styled-components';
 
 const SingleImageComponent = () => {
     
-    const [image, setImage] = useState({})
+    const [image, setImage] = useState({});
+    const [commentInput, setCommentInput] = useState({ displayName: '', commentText: '' });
     let { id } = useParams()
 
     
@@ -32,6 +33,22 @@ const SingleImageComponent = () => {
             <div className="img-wrapper">
                 <img src={image.fileLink} alt={image.alttext} />
             </div>
+            <h2>Comments</h2>
+            <div className="comments-wrapper">
+                <div className="comments">
+                    
+                </div>
+                <div className="Comments-input">
+                    <form>
+                        <label htmlFor="displayName">Name:</label>
+                        <input type="text" name="displayName" />
+                        <label htmlFor="commentText">Comment:</label>
+                        <textarea name="commentText" id="comment" cols="30" rows="10"></textarea>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+                <br />
+            </div>
         </StyledDiv>
     )
 }
@@ -42,13 +59,13 @@ const StyledDiv = styled.div`
         justify-content: center;
         img {
             margin-top: 2rem;
-            width: 50%;
+            width: 40%;
             margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             transition: 0.5s;
             border-radius: 3px;
             &:hover {
-                transform: scale(1.03);
+                transform: scale(1.01);
             }
         }
     }
