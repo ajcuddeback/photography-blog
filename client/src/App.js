@@ -54,7 +54,7 @@ function App() {
           <NavComponent isLoggedIn={isLoggedIn} />
           <GalleryComponent />
         </Route>
-        <Route path='/image/:id'>
+        <Route path='/images/:id'>
           <NavComponent isLoggedIn={isLoggedIn} />
           <SingleImageComponent />
         </Route>

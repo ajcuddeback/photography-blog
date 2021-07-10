@@ -7,12 +7,14 @@ import styled from 'styled-components';
 // Components
 import EachImageComponent from '../sub-components/Images/EachImageComponent';
 import TagsComponent from '../sub-components/TagsComponent';
+import SpinnerComponent from '../sub-components/SpinnerComponent';
 
 const GalleryComponent = () => {
     const [images, setImages] = useState([]);
     const [tags, setTags] = useState([]);
-    const [selectedTag, setSelectedTag] = useState('All')
-    const [isAll, setIsAll] = useState(true)
+    const [selectedTag, setSelectedTag] = useState('All');
+    const [isAll, setIsAll] = useState(true);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect( async () => {
         const response = await getAllImages();
@@ -36,6 +38,7 @@ const GalleryComponent = () => {
             tags.unshift({tagName: "All"});
 
             setTags(tags);
+            setIsLoaded(true)
         } catch (err) {
             console.log(err)
         }
@@ -54,13 +57,19 @@ const GalleryComponent = () => {
 
     return (
         <>
-             <select onChange={handleSelectChange} name="tagsIndex" id="tag">
-                { tags.map(tag => (<TagsComponent tag={tag} key={tag._id} />)) }
-            </select>
-            <StyledDiv>
-                { isAll ? images.map(image => (<EachImageComponent image={image} key={images._id} />)) : images.filter(img => img.tags.tagName === selectedTag).map(image => (<EachImageComponent image={image} key={images._id} />)) }
-               
-            </StyledDiv>
+            {isLoaded ? (
+            <>
+                <select onChange={handleSelectChange} name="tagsIndex" id="tag">
+                    { tags.map(tag => (<TagsComponent tag={tag} key={tag._id} />)) }
+                </select>
+                <StyledDiv>
+                    { isAll ? images.map(image => (<EachImageComponent image={image} key={images._id} />)) : images.filter(img => img.tags.tagName === selectedTag).map(image => (<EachImageComponent image={image} key={images._id} />)) }
+                </StyledDiv>
+            </>
+            ) : (
+                <SpinnerComponent />
+            )}
+             
         </>
     )
 

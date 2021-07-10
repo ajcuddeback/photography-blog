@@ -23,6 +23,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "if-env": "^1.0.4",
+    "react-lazy-load-image-component": "^1.5.1",
     "spin.js": "^4.1.0"
   },
   "devDependencies": {
