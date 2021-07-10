@@ -18,7 +18,6 @@ const EachImageComponent = ({ image, isLoggedIn, setDeleteSuccess }) => {
         if(data) {
             setToken(data)
         }
-        setDeleteSuccess(false);
     }, []);
 
     const handleDeleteImage = async () => {
