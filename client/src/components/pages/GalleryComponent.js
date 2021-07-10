@@ -9,12 +9,13 @@ import EachImageComponent from '../sub-components/Images/EachImageComponent';
 import TagsComponent from '../sub-components/TagsComponent';
 import SpinnerComponent from '../sub-components/SpinnerComponent';
 
-const GalleryComponent = () => {
+const GalleryComponent = ({ isLoggedIn }) => {
     const [images, setImages] = useState([]);
     const [tags, setTags] = useState([]);
     const [selectedTag, setSelectedTag] = useState('All');
     const [isAll, setIsAll] = useState(true);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [deleteSuccess, setDeleteSuccess] = useState(false);
 
     useEffect( async () => {
         const response = await getAllImages();
@@ -43,7 +44,7 @@ const GalleryComponent = () => {
             console.log(err)
         }
         
-    }, [selectedTag]);
+    }, [selectedTag, deleteSuccess]);
 
     const handleSelectChange = async (e) => {
         setSelectedTag(e.target.value)
@@ -63,7 +64,7 @@ const GalleryComponent = () => {
                     { tags.map(tag => (<TagsComponent tag={tag} key={tag._id} />)) }
                 </select>
                 <StyledDiv>
-                    { isAll ? images.map(image => (<EachImageComponent image={image} key={images._id} />)) : images.filter(img => img.tags.tagName === selectedTag).map(image => (<EachImageComponent image={image} key={images._id} />)) }
+                    { isAll ? images.map(image => (<EachImageComponent image={image} isLoggedIn={isLoggedIn} setDeleteSuccess={setDeleteSuccess} key={images._id} />)) : images.filter(img => img.tags.tagName === selectedTag).map(image => (<EachImageComponent image={image} key={images._id} />)) }
                 </StyledDiv>
             </>
             ) : (

@@ -41,11 +41,11 @@ export const getAllImages = () => {
 
 export const getPhotoByTag = (id) => {
     return fetch(`/api/photos/tag/${id}`);
-}
+};
 
 export const getSinglePhoto = (id) => {
     return fetch(`/api/photos/${id}`);
-} 
+};
 
 export const postComment = (data, id) => {
     return fetch(`/api/photos/comment/${id}`, {
@@ -55,4 +55,13 @@ export const postComment = (data, id) => {
         },
         body: JSON.stringify(data)
     });
+};
+
+export const deleteImage = (key, token) => {
+    return fetch(`/api/photos/delete/${key}`, {
+        method: 'DELETE', 
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    })
 }

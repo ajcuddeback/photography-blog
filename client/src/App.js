@@ -52,11 +52,11 @@ function App() {
         ): ''}
         <Route path='/gallery'>
           <NavComponent isLoggedIn={isLoggedIn} />
-          <GalleryComponent />
+          <GalleryComponent isLoggedIn={isLoggedIn} />
         </Route>
         <Route path='/images/:id'>
           <NavComponent isLoggedIn={isLoggedIn} />
-          <SingleImageComponent />
+          <SingleImageComponent isLoggedIn={isLoggedIn} />
         </Route>
         
         <Route path='/about'>

@@ -5,15 +5,20 @@ import { useParams } from 'react-router-dom';
 import { getSinglePhoto, postComment } from '../../utils/API';
 import styled from 'styled-components';
 
+// Components
+import EachCommentComponent from '../sub-components/EachCommentComponent';
+
 const SingleImageComponent = () => {
     
     const [image, setImage] = useState({});
     const [commentInput, setCommentInput] = useState({ displayName: '', commentText: '' });
-    let { id } = useParams()
+    const [hasComments, setHasComments] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [commentLength, setCommentLength] = useState(0);
+    let { id } = useParams();
 
     
     useEffect( async () => {
-        try {
             const response = await getSinglePhoto(id)
 
             if(!response) {
@@ -23,10 +28,21 @@ const SingleImageComponent = () => {
             const data = await response.json();
 
             setImage(data);
-        } catch (error) {
-            console.error(error)
+            setSubmitted(false);
+      
+
+        if (data.comments.length < 1) {
+            setHasComments(false);
+        } else {
+            setHasComments(true)
         }
-    }, [])
+
+        if(data.comments.length < 1) {
+            setCommentLength(0);
+        } else {
+            setCommentLength(data.comments.length);
+        }
+    }, [submitted])
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -48,6 +64,7 @@ const SingleImageComponent = () => {
             const data = await response.json();
 
             setCommentInput({ displayName: '', commentText: '' })
+            setSubmitted(true);
 
         } catch (e) {
             console.error(e);
@@ -62,7 +79,7 @@ const SingleImageComponent = () => {
             <h2>Comments</h2>
             <div className="comments-wrapper">
                 <div className="comments">
-                    
+                    { hasComments ? image.comments.map(comment => (<EachCommentComponent comment={comment} commentLength={commentLength} />)) : (<h2>No Commments!</h2>) }
                 </div>
                 <div className="Comments-input">
                     <form onSubmit={handleFormSubmit}>
