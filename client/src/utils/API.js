@@ -46,3 +46,13 @@ export const getPhotoByTag = (id) => {
 export const getSinglePhoto = (id) => {
     return fetch(`/api/photos/${id}`);
 } 
+
+export const postComment = (data, id) => {
+    return fetch(`/api/photos/comment/${id}`, {
+        method: 'PUT', 
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+}

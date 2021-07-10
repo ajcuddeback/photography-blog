@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 //Dependencies
-import { getSinglePhoto } from '../../utils/API';
+import { getSinglePhoto, postComment } from '../../utils/API';
 import styled from 'styled-components';
-import { set } from 'mongoose';
 
 const SingleImageComponent = () => {
     
@@ -33,6 +32,26 @@ const SingleImageComponent = () => {
         const { name, value } = e.target;
 
         setCommentInput({...commentInput, [name]: value});
+    };
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+
+            const response = await postComment(commentInput, id);
+
+            if(!response) {
+                throw new Error('Something went wrong!');
+            }
+
+            const data = await response.json();
+
+            setCommentInput({ displayName: '', commentText: '' })
+
+        } catch (e) {
+            console.error(e);
+        }
     }
     
     return (
@@ -46,11 +65,11 @@ const SingleImageComponent = () => {
                     
                 </div>
                 <div className="Comments-input">
-                    <form>
+                    <form onSubmit={handleFormSubmit}>
                         <label htmlFor="displayName">Name:</label>
-                        <input onChange={handleInputChange} type="text" name="displayName" />
+                        <input onChange={handleInputChange} value={commentInput.displayName} type="text" name="displayName" required />
                         <label htmlFor="commentText">Comment:</label>
-                        <textarea onChange={handleInputChange} name="commentText" id="comment" cols="30" rows="10"></textarea>
+                        <textarea onChange={handleInputChange} value={commentInput.commentText} name="commentText" id="comment" cols="30" rows="10" required></textarea>
                         <button type="submit">Submit</button>
                     </form>
                 </div>
