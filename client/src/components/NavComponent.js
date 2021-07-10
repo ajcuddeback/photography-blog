@@ -25,7 +25,6 @@ const NavComponent = ({ isLoggedIn }) => {
                     </div>
                     <div className="links">
                         <Link to='/'>Home</Link>
-                        <Link to='/gallery'>Gallery</Link>
                         <Link to='/about'>About</Link>
                         {isLoggedIn ? (<Link to='/admin'>Admin</Link>) : ''}
                         {isLoggedIn ? (<button onClick={logout}>Logout</button>) : ''}

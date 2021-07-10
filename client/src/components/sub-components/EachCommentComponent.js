@@ -26,8 +26,6 @@ const EachCommentComponent = ({ comment, photoId, isLoggedIn, setDeleteSuccess }
         }
 
         const data = await response.json();
-
-        console.log(data);
         setDeleteSuccess(true);
     }
 

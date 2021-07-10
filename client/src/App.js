@@ -11,7 +11,6 @@ import {
 // Components
 import AboutComponent from './components/pages/AboutComponent';
 import AdminComponent from './components/pages/AdminComponent';
-import GalleryComponent from './components/pages/GalleryComponent';
 import SingleImageComponent from './components/pages/SingleImageComponent';
 import HomeComponent from './components/pages/HomeComponent';
 import LoginComponent from './components/pages/LoginComponent';
@@ -50,10 +49,6 @@ function App() {
           <AdminComponent />
         </Route>
         ): ''}
-        <Route path='/gallery'>
-          <NavComponent isLoggedIn={isLoggedIn} />
-          <GalleryComponent isLoggedIn={isLoggedIn} />
-        </Route>
         <Route path='/images/:id'>
           <NavComponent isLoggedIn={isLoggedIn} />
           <SingleImageComponent isLoggedIn={isLoggedIn} />
@@ -77,7 +72,7 @@ function App() {
         </Route>
         <Route exact path='/'>
           <NavComponent isLoggedIn={isLoggedIn} />
-          <HomeComponent />
+          <HomeComponent isLoggedIn={isLoggedIn} />
         </Route>
         <Route path='*'>
           <Page404Component />
