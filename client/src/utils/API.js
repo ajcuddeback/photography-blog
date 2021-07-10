@@ -74,3 +74,35 @@ export const deleteComment = (commentId, photoId, token) => {
         }
     })
 };
+
+export const sendMail = (email) => {
+    let emailObj = { email }
+    return fetch('/api/users/sendMail', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(emailObj)
+    });
+};
+
+export const confirmCode = (code) => {
+    let codeObj = { code }
+    return fetch('/api/users/confirmCode', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(codeObj)
+    });
+};
+
+export const resetPw = (data) => {
+    return fetch('/api/users/resetpw', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+};

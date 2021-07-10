@@ -5,7 +5,6 @@ const ForgotPasswordComponent = () => {
 
     return (
         <>
-            <h1>\ForgotPW</h1>
         </>
     )
 
