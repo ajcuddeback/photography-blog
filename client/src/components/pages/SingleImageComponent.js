@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 //Dependencies
 import { getSinglePhoto } from '../../utils/API';
 import styled from 'styled-components';
+import { set } from 'mongoose';
 
 const SingleImageComponent = () => {
     
@@ -27,6 +28,12 @@ const SingleImageComponent = () => {
             console.error(error)
         }
     }, [])
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+
+        setCommentInput({...commentInput, [name]: value});
+    }
     
     return (
         <StyledDiv>
@@ -41,9 +48,9 @@ const SingleImageComponent = () => {
                 <div className="Comments-input">
                     <form>
                         <label htmlFor="displayName">Name:</label>
-                        <input type="text" name="displayName" />
+                        <input onChange={handleInputChange} type="text" name="displayName" />
                         <label htmlFor="commentText">Comment:</label>
-                        <textarea name="commentText" id="comment" cols="30" rows="10"></textarea>
+                        <textarea onChange={handleInputChange} name="commentText" id="comment" cols="30" rows="10"></textarea>
                         <button type="submit">Submit</button>
                     </form>
                 </div>
