@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+//Dependencies
 import { getSinglePhoto } from '../../utils/API';
+import styled from 'styled-components';
 
 const SingleImageComponent = () => {
     
@@ -20,20 +22,36 @@ const SingleImageComponent = () => {
             const data = await response.json();
 
             setImage(data);
-
-            console.log(image)
-
-            console.log(data)
         } catch (error) {
             console.error(error)
         }
     }, [])
     
     return (
-        <>
-            <img src={image.fileLink} alt="" />
-        </>
+        <StyledDiv>
+            <div className="img-wrapper">
+                <img src={image.fileLink} alt={image.alttext} />
+            </div>
+        </StyledDiv>
     )
 }
+
+const StyledDiv = styled.div`
+    .img-wrapper {
+        display: flex;
+        justify-content: center;
+        img {
+            margin-top: 2rem;
+            width: 50%;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: 0.5s;
+            border-radius: 3px;
+            &:hover {
+                transform: scale(1.03);
+            }
+        }
+    }
+`
 
 export default SingleImageComponent
