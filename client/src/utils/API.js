@@ -64,4 +64,13 @@ export const deleteImage = (key, token) => {
             authorization: `Bearer ${token}`
         }
     })
-}
+};
+
+export const deleteComment = (commentId, photoId, token) => {
+    return fetch(`/api/photos/comment/${commentId}/${photoId}`, {
+        method: 'PUT',
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    })
+};

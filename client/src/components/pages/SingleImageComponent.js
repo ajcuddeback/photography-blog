@@ -8,13 +8,14 @@ import styled from 'styled-components';
 // Components
 import EachCommentComponent from '../sub-components/EachCommentComponent';
 
-const SingleImageComponent = () => {
+const SingleImageComponent = ({ isLoggedIn }) => {
     
     const [image, setImage] = useState({});
     const [commentInput, setCommentInput] = useState({ displayName: '', commentText: '' });
     const [hasComments, setHasComments] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [commentLength, setCommentLength] = useState(0);
+    const [deleteSuccess, setDeleteSuccess] = useState(false);
     let { id } = useParams();
 
     
@@ -29,7 +30,7 @@ const SingleImageComponent = () => {
 
             setImage(data);
             setSubmitted(false);
-      
+            setDeleteSuccess(false)
 
         if (data.comments.length < 1) {
             setHasComments(false);
@@ -42,7 +43,7 @@ const SingleImageComponent = () => {
         } else {
             setCommentLength(data.comments.length);
         }
-    }, [submitted])
+    }, [submitted, deleteSuccess])
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -79,7 +80,7 @@ const SingleImageComponent = () => {
             <h2>Comments</h2>
             <div className="comments-wrapper">
                 <div className="comments">
-                    { hasComments ? image.comments.map(comment => (<EachCommentComponent comment={comment} commentLength={commentLength} />)) : (<h2>No Commments!</h2>) }
+                    { hasComments ? image.comments.map(comment => (<EachCommentComponent comment={comment} commentLength={commentLength} photoId={id} setDeleteSuccess={setDeleteSuccess} isLoggedIn={isLoggedIn} />)) : (<h2>No Commments!</h2>) }
                 </div>
                 <div className="Comments-input">
                     <form onSubmit={handleFormSubmit}>
