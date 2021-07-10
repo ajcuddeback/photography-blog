@@ -116,6 +116,10 @@ const StyledDiv = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-top: 3rem;
+        h1 {
+            margin-bottom: 1rem;
+        }
         img {
         width: 70%;
         }
