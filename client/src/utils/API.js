@@ -97,7 +97,8 @@ export const confirmCode = (code) => {
     });
 };
 
-export const resetPw = (data) => {
+export const resetPw = (email, password) => {
+    const data = { email, password }
     return fetch('/api/users/resetpw', {
         method: 'PUT',
         headers: {
