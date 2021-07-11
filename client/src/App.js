@@ -20,6 +20,7 @@ import SubmitCodeComponent from './components/pages/reset-password/SubmitCodeCom
 import NavComponent from './components/NavComponent';
 import Page404Component from './components/pages/Page404Component';
 import GlobalStyle from './components/GlobalStyles';
+import './index.css'
 
 function App() {
 

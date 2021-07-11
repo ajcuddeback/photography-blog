@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 // Dependencies
 import { getTags, getAllImages, getFeaturedImage } from '../../utils/API';
 import styled from 'styled-components';
+import ScrollAnimation from 'react-animate-on-scroll';
+import "animate.css"
 
 // Components
 import EachImageComponent from '../sub-components/Images/EachImageComponent';
@@ -75,10 +77,14 @@ const GalleryComponent = ({ isLoggedIn }) => {
         <StyledDiv>
             {isLoaded ? (
             <>
+            <ScrollAnimation animateIn="fadeIn">
                 <div className="welcome-wrapper">
                     <h1>Welcome to NC Photograhy Group!</h1>
-                    <img src={featuredImage} alt="featured image" className="featured-img" />
+                    
+                        <img src={featuredImage} alt="featured image" className="featured-img" />
+                    
                 </div>
+                </ScrollAnimation>
                 <div>
                     <select onChange={handleSelectChange} name="tagsIndex" id="tag">
                         { tags.map(tag => (<TagsComponent tag={tag} key={tag._id} />)) }

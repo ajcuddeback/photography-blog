@@ -9,11 +9,9 @@ const GlobalStyle = createGlobalStyle`
     body {
         background-color: #202060;
     }
-    p {
+    h1, h2, label, a, p {
         color: #B030B0;
-    }
-    h1, h2, label, a {
-        color: #B030B0;
+        font-family: PlayfairDisplay;
     }
     a {
         text-decoration: none;

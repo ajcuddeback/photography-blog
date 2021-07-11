@@ -10,7 +10,7 @@ const AboutComponent = () => {
         <StyledDiv>
             <img src={Profile} alt="Nikki's Profile Picture" />
             <h2>Nikki Cuddeback</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi temporibus facilis laboriosam praesentium necessitatibus dolore voluptates cupiditate deleniti, numquam itaque perspiciatis alias nisi. Quibusdam facere sint incidunt dolores, distinctio sed dignissimos, quia dicta soluta repellendus ut, in vel ratione. Officiis placeat sequi corporis, incidunt ab non a quod doloribus laudantium cum quis aliquam. Alias doloremque pariatur repellat laborum iste rem sed magni provident quibusdam unde. Rem, possimus provident. Accusantium veniam adipisci ab. Suscipit officiis quos facilis rem quae sint necessitatibus.</p>
+            <p>Hello! My name is Nichole Cuddeback, and I am a small photographer trying to get more out there. I have been doing photography for 6 years, almost 7. It is my passion and my dream. I wanted to share my best work with you. I hope you enjoy!</p>
         </StyledDiv>
     )
 }

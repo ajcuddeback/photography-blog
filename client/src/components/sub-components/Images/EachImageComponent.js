@@ -8,6 +8,8 @@ import { deleteImage } from '../../../utils/API';
 import Auth from '../../../utils/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import "animate.css"
+import AOS from 'aos';
 
 const EachImageComponent = ({ image, isLoggedIn, setDeleteSuccess }) => {
     //State
@@ -18,6 +20,7 @@ const EachImageComponent = ({ image, isLoggedIn, setDeleteSuccess }) => {
         if(data) {
             setToken(data)
         }
+        AOS.init();
     }, []);
 
     const handleDeleteImage = async () => {
@@ -33,9 +36,11 @@ const EachImageComponent = ({ image, isLoggedIn, setDeleteSuccess }) => {
 
     return (
         <StyledDiv>
-            <Link to={'/images/' + image._id}>
-                <LazyLoadImage src={image.fileLink} alt={image.alttext} className='image' />
-            </Link>
+           <div data-aos="fade-up">
+                <Link to={'/images/' + image._id}>
+                    <LazyLoadImage src={image.fileLink} alt={image.alttext} className='image' />
+                </Link>
+            </div>
             {isLoggedIn ? (<FontAwesomeIcon icon={faTrashAlt} onClick={handleDeleteImage} />) : ''}
         </StyledDiv>
     )
