@@ -37,6 +37,18 @@ const GlobalStyle = createGlobalStyle`
             border: .5px solid #202040;
         }
     }
+
+
+    select {
+        display: block;
+        font-family: PlayfairDisplay;
+        background-color: #B030B0;
+        color: white;
+        padding: .2rem .5rem;
+        &:hover {
+            cursor: pointer;
+        }
+    }
 `;
 
 export default GlobalStyle;
