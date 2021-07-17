@@ -13,7 +13,9 @@ const {
     getPhotos,
     deletePhoto,
     addComment,
-    deleteComment
+    deleteComment, 
+    addTag,
+    deleteTag
 } = require('../../controllers/photo-controllers');
 
 router.route('/').get(getPhotos);
@@ -33,5 +35,9 @@ router.route('/comment/:id').put(addComment);
 router.route('/comment/:id/:photoId').put(authMiddleware ,deleteComment);
 
 router.route('/delete/:key').delete(authMiddleware, deletePhoto);
+
+router.route('/tags').post(addTag);
+
+router.route('/tags/:id').delete(deleteTag);
 
 module.exports = router;

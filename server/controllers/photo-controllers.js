@@ -121,5 +121,25 @@ module.exports = {
         }
 
         res.json(photoData);
+    }, 
+    async addTag(req, res) {
+        const data = await Tag.create(req.body);
+
+        if(!data) {
+            res.status(400).json({ message: 'Something went wrong!' });
+            return;
+        }
+
+        res.json(data);
+    },
+    async deleteTag(req, res) {
+        const data = await Tag.deleteOne({ _id: req.params.id }, { new: true });
+
+        if(!data) {
+            res.status(400).json({ message: 'No tag found at this ID!' });
+            return;
+        }
+
+        res.json(data);
     }
 }
