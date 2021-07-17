@@ -23,10 +23,28 @@ const StyledDiv = styled.div`
         margin-top: 3rem;
         border-radius: 50%;
         width: 30%;
+        @media (max-width: 900px) {
+            width: 40%;
+        }
+        @media (max-width: 800px) {
+            width: 50%;
+        }
+        @media (max-width: 600px) {
+            width: 60%;
+        }
     }
     p {
         width: 30%;
         text-align: center;
+        @media (max-width: 900px) {
+            width: 40%;
+        }
+        @media (max-width: 800px) {
+            width: 50%;
+        }
+        @media (max-width: 600px) {
+            width: 60%;
+        }
     }
 `
 
