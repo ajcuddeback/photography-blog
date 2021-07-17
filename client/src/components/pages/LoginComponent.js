@@ -13,6 +13,7 @@ const LoginComponent = ({ setIsLoggedIn }) => {
 
     // State
     const [formData, setFormData] = useState({ username: '', password: '' });
+    const [loginSuccess, setLoginSuccess] = useState(true);
 
     // Handle input function
     const handleInputChange = (event) => {
@@ -29,6 +30,10 @@ const LoginComponent = ({ setIsLoggedIn }) => {
             const response = await loginUser(formData);
 
             if(!response.ok) {
+                setLoginSuccess(false);
+                setTimeout(() => {
+                    setLoginSuccess(true);
+                }, 5000)
                 throw new Error('something went wrong');
             }
 
@@ -59,6 +64,10 @@ const LoginComponent = ({ setIsLoggedIn }) => {
                         <input onChange={handleInputChange} type="password" name="password" id="password" />
                     </div>
 
+                    <div>
+                        {loginSuccess ? '' : <p className="login-fail">Login failed!</p>}
+                    </div>
+
                     <button type="submit">Login</button>
                 </form>
                 <br />
@@ -85,6 +94,12 @@ const StyledLogin = styled.div`
             border: 2px solid #B030B0;
             border-radius: 7px;
             background-color: #202040;
+            .login-fail {
+                background-color: red;
+                padding: 0.3rem;
+                border-radius: 10px;
+                color: white;
+            }
             div {
                 display: block;
             }
