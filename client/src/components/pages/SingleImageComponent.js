@@ -82,14 +82,15 @@ const SingleImageComponent = ({ isLoggedIn }) => {
                 <div className="img-wrapper">
                     <img src={image.fileLink} alt={image.alttext} />
                 </div>
-                <h2>Comments</h2>
+                
                 <div className="comments-wrapper">
+                <h1>Comments</h1>
                     <div className="comments">
-                        { hasComments ? image.comments.map(comment => (<EachCommentComponent comment={comment} commentLength={commentLength} photoId={id} setDeleteSuccess={setDeleteSuccess} isLoggedIn={isLoggedIn} />)) : (<h2>No Commments!</h2>) }
+                        { hasComments ? image.comments.map(comment => (<EachCommentComponent comment={comment} commentLength={commentLength} photoId={id} setDeleteSuccess={setDeleteSuccess} isLoggedIn={isLoggedIn} />)) : (<h2 className="comment">No Commments here! Be the first to comment!</h2>) }
                     </div>
                     <div className="Comments-input">
                         <form onSubmit={handleFormSubmit}>
-                            <label htmlFor="displayName">Name:</label>
+                            <label htmlFor="displayName">Username:</label>
                             <input onChange={handleInputChange} value={commentInput.displayName} type="text" name="displayName" required />
                             <label htmlFor="commentText">Comment:</label>
                             <textarea onChange={handleInputChange} value={commentInput.commentText} name="commentText" id="comment" cols="30" rows="10" required></textarea>
@@ -118,8 +119,38 @@ const StyledDiv = styled.div`
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             transition: 0.5s;
             border-radius: 3px;
+            @media (max-width: 550px) {
+                width: 80%;
+            }
             &:hover {
                 transform: scale(1.01);
+            }
+        }
+    }
+    .comments-wrapper {
+        border: 1px solid white;
+        border-radius: 5px;
+        max-width: 70%;
+        margin: 0 auto;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+        background-color: #0e0e52;
+        .comments {
+            .comment {
+                background-color: #202060;
+                margin-bottom: 1rem;
+                padding: .5rem;
+            }
+        }
+        .Comments-input {
+            form {
+                display: flex;
+                flex-direction: column;
+                input, textarea {
+                    margin-bottom: 1rem;
+                }
             }
         }
     }

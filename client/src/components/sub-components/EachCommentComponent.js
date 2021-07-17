@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 import { deleteComment } from '../../utils/API';
 import Auth from '../../utils/auth';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import styled from 'styled-components';
 
 const EachCommentComponent = ({ comment, photoId, isLoggedIn, setDeleteSuccess }) => {
 
@@ -30,13 +31,28 @@ const EachCommentComponent = ({ comment, photoId, isLoggedIn, setDeleteSuccess }
     }
 
     return (
-        <>
-            <h2>Username: {comment.displayName}</h2>
-            <p>Comment: {comment.commentText}</p>
-            {isLoggedIn ? (<FontAwesomeIcon icon={faTrashAlt} onClick={handleCommentDelete} />) : ''}
-        </>
+        <StyledDiv>
+            <h2>{comment.displayName}</h2>
+            <p>{comment.commentText}</p>
+            {isLoggedIn ? (<FontAwesomeIcon icon={faTrashAlt} onClick={handleCommentDelete} className="icon" />) : ''}
+        </StyledDiv>
     )
 
 }
+
+const StyledDiv = styled.div`
+    background-color: #202060;
+    margin-bottom: 1rem;
+    padding: .5rem;
+    .icon {
+        position: relative;
+        float: right;
+        bottom: 2rem;
+        color: red;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+`
 
 export default EachCommentComponent;

@@ -86,6 +86,7 @@ const GalleryComponent = ({ isLoggedIn }) => {
                 </div>
                 </ScrollAnimation>
                 <div className="custom-select">
+                    <label htmlFor="tagsIndex">Filter by tag: </label>
                     <select onChange={handleSelectChange} name="tagsIndex" id="tag">
                         { tags.map(tag => (<TagsComponent tag={tag} key={tag._id} />)) }
                     </select>
@@ -133,7 +134,10 @@ const StyledDiv = styled.div`
     .custom-select {
         display: flex;
         justify-content: flex-end;
-        margin-right: 2rem;
+        margin: 2rem;
+        #tag {
+            margin-left: 1rem;
+        }
     }
     
 `
