@@ -40,8 +40,8 @@ const EachImageComponent = ({ image, isLoggedIn, setDeleteSuccess }) => {
                 <Link to={'/images/' + image._id}>
                     <LazyLoadImage src={image.fileLink} alt={image.alttext} className='image' />
                 </Link>
+                {isLoggedIn ? (<FontAwesomeIcon icon={faTrashAlt} onClick={handleDeleteImage} className="delete-icon" />) : ''}
             </div>
-            {isLoggedIn ? (<FontAwesomeIcon icon={faTrashAlt} onClick={handleDeleteImage} />) : ''}
         </StyledDiv>
     )
 
@@ -58,6 +58,17 @@ const StyledDiv = styled.div`
         &:hover {
             transform: scale(1.03);
         }
+   }
+   .delete-icon {
+       position: relative;
+       bottom: 2rem;
+       right: 2rem;
+       color: red;
+       width: 25px;
+       height: 25px;
+       &:hover {
+           cursor: pointer;
+       }
    }
 `
 
