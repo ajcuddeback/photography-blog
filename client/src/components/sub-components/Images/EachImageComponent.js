@@ -55,6 +55,9 @@ const StyledDiv = styled.div`
         transition: 0.5s;
         border-radius: 3px;
         cursor: pointer;
+        @media (max-width: 400px) {
+            width: 80%;
+        }
         &:hover {
             transform: scale(1.03);
         }
@@ -69,6 +72,14 @@ const StyledDiv = styled.div`
        &:hover {
            cursor: pointer;
        }
+       @media (max-width: 1500px) {
+            right: 0rem;
+            bottom: 4rem;
+        }
+        @media (max-width: 630px) {
+            bottom: 2rem;
+            right: 2rem;
+        }
    }
 `
 

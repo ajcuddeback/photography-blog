@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { resetPw } from '../../../utils/API';
+import styled from 'styled-components';
 
 const ResetPWComponent = () => {
 
@@ -37,7 +38,7 @@ const ResetPWComponent = () => {
     }
 
     return (
-        <>
+        <StyledDiv>
             <h2>Reset your password!</h2>
             <form onSubmit={handleFormSubmit}>
                 <label htmlFor="email">Email: </label>
@@ -51,9 +52,30 @@ const ResetPWComponent = () => {
             <div>
                 {samePassword ? '' : <p>Password do not match!</p>}
             </div>
-        </>
+        </StyledDiv>
     )
 
 }
-
+const StyledDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40vh;
+    form {
+        display: flex;
+        flex-direction: column;
+        input {
+            margin-bottom: 1rem;
+        }
+    }
+    div {
+        p {
+            padding:.5rem;
+            border: 1px solid white;
+            background-color: red;
+            color: black
+        }
+    }
+`
 export default ResetPWComponent;

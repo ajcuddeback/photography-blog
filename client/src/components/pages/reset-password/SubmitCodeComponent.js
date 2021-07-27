@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 //dependencies
 import { confirmCode } from '../../../utils/API';
-
+import styled from 'styled-components';
 const SubmitCodeComponent = () => {
 
     const [code, setCode] = useState('');
@@ -30,18 +30,28 @@ const SubmitCodeComponent = () => {
     }
 
     return (
-        <>
+        <StyledDiv>
             <h1>Your code has been sent</h1>
+            <br/>
             <h2>Please check the email you provided for you 6 digit authorization code. Please enter it below</h2>
+            <br></br>
             <form onSubmit={handleFormSubmit}>
                 <label htmlFor="code">Code: </label>
                 <input type="number" onChange={handleInputChange} value={code} name="code" />
                 <button type="submit">Submit Code</button>
             </form>
 
-        </>
+        </StyledDiv>
     )
 
 }
+
+const StyledDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40vh;
+`
 
 export default SubmitCodeComponent;

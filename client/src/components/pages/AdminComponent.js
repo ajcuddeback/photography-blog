@@ -146,6 +146,14 @@ const StyledDiv = styled.div`
         align-items: center;
         width: 600px;
         height: 500px;
+        @media (max-width: 600px) {
+            width: 400px;
+            height: 500px;;
+        }
+        @media (max-width: 400px) {
+            width: 300px;
+            height: 500px;;
+        }
         .img-preview {
             img {
                 max-width: 500px;
@@ -156,6 +164,9 @@ const StyledDiv = styled.div`
         .wrapper {
             display: flex;
             width: 100%;
+            @media (max-width: 400px) {
+                flex-direction: column;
+            }
             div {
                 display: flex;
                 flex-direction: column;
