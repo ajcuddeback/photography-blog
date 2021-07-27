@@ -47,6 +47,7 @@ const StyledNav = styled.div`
         @media (max-width: 400px) {
             flex-direction: column;
             justify-content: center;
+            height: 150px;
         }
         .logo {
             .img {

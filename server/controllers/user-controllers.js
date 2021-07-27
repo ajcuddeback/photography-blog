@@ -85,7 +85,7 @@ module.exports = {
 
         // Based of user data that comes back, send email to user with code
         let info = await transporter.sendMail({
-            from: '"Me" ajcuddeback@gmail.com',
+            from: '"AJWebDev" ajcuddeback@gmail.com',
             to: req.body.email,
             subject: "Authentication Code",
             text: `Your one time code is ${code}. Your code will expire in 15 minutes. Please do not share your code with anyone.`

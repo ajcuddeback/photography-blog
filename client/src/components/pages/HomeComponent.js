@@ -126,6 +126,7 @@ const StyledDiv = styled.div`
         margin-top: 3rem;
         h1 {
             margin-bottom: 1rem;
+            text-align: center
         }
         img {
         width: 70%;
