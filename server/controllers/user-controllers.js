@@ -59,7 +59,7 @@ module.exports = {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'spoofcuddeback@gmail.com',
+                user: 'acuddwebdev@gmail.com',
                 pass: `${process.env.GOOGLE_PW}`
             }
         });
@@ -85,7 +85,7 @@ module.exports = {
 
         // Based of user data that comes back, send email to user with code
         let info = await transporter.sendMail({
-            from: '"AJWebDev" ajcuddeback@gmail.com',
+            from: '"AJWebDev" acuddwebdev@gmail.com',
             to: req.body.email,
             subject: "Authentication Code",
             text: `Your one time code is ${code}. Your code will expire in 15 minutes. Please do not share your code with anyone.`
