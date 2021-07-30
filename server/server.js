@@ -13,15 +13,15 @@ app.use(express.json());
 
 // If in production, user the client/build
 if(process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/deploy')));
+    app.use(express.static(path.join(__dirname, '../build/deploy')));
 };
 
 // User api routes
 app.use(routes);
 
-// If it is not in production, get client/deploy/index.html
+// If it is not in production, get build/deploy/index.html
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/deploy/index.html'));
+    res.sendFile(path.join(__dirname, '../build/deploy/index.html'));
 });
 
 // Start the server after the database starts
