@@ -3,13 +3,10 @@ const { Tag } = require('../models');
 
 db.once('open', async () => {
     await Tag.insertMany([
-        { tagName: 'Featured' },
-        { tagName: 'Free to use' },
-        { tagName: 'Nature' },
+        { tagName: 'Woods' },
         { tagName: 'Water' },
-        { tagName: 'Beach' },
-        { tagName: 'Out in the woods' },
-        { tagName: 'Flowers' }
+        { tagName: 'People' },
+        { tagName: 'Sunset' }
     ])
 
     console.log('Tags Seeded')
