@@ -9,8 +9,8 @@ const AboutComponent = () => {
     return (
         <StyledDiv>
             <img src={Profile} alt="Nikki's Profile Picture" />
-            <h2>Nikki Cuddeback</h2>
-            <p>Hello! My name is Nichole Cuddeback, and I am a small photographer trying to get more out there. I have been doing photography for 6 years, almost 7. It is my passion and my dream. I wanted to share my best work with you. I hope you enjoy!</p>
+            <h2>Nichole Cuddeback</h2>
+            <p>Hello! My name is Nichole Cuddeback, and I am a small photographer trying to put myself out there. I have been doing photography for 6 years, almost 7. It is my passion and my dream. I wanted to share my best work with you. I hope you enjoy!</p>
         </StyledDiv>
     )
 }
