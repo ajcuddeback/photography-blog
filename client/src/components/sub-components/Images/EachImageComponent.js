@@ -80,6 +80,14 @@ const StyledDiv = styled.div`
             bottom: 2rem;
             right: 2rem;
         }
+        @media (max-width: 450px) {
+            bottom: 4rem;
+            right: -22rem;;
+        }
+        @media (max-width: 403px) {
+            bottom: 2rem;
+            right: 2rem;
+        }
    }
 `
 
