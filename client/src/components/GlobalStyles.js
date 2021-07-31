@@ -49,6 +49,25 @@ const GlobalStyle = createGlobalStyle`
             cursor: pointer;
         }
     }
+
+    ::-webkit-scrollbar {
+        width: 11px;
+    }
+        /* Track */
+    ::-webkit-scrollbar-track {
+    background: #1f1d42; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+    background: #B030B0; 
+    border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+    background: #802280; 
+}
 `;
 
 export default GlobalStyle;
