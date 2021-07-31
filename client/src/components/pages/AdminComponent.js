@@ -167,6 +167,18 @@ const StyledDiv = styled.div`
                 max-width: 500px;
                 border: 1px solid #B030B0;
                 border-radius: 5px;
+                @media (max-width: 750px) {
+                    max-width: 400px;
+                }
+                @media (max-width: 600px) {
+                    max-width: 350px;
+                }
+                @media (max-width: 500px) {
+                    max-width: 300px;
+                }
+                @media (max-width: 400px) {
+                    max-width: 250px;
+                }
             }
         }
         .wrapper {
